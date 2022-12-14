@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CrudController;
+use App\Http\Controllers\PenjaminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipeIksController;
 
@@ -17,6 +18,8 @@ use App\Http\Controllers\TipeIksController;
 Route::get('/',function(){
     return redirect('/crud');
 });
+
+
 Route::get('/crud',[CrudController::class,'index'])->name('crud.list');
 Route::get('/crud/create',[CrudController::class,'create'])->name('crud.create');
 Route::get('/crud/{id}/edit',[CrudController::class,'edit'])->name('crud.edit');
@@ -33,3 +36,14 @@ Route::prefix('/tipeiks')->group(function(){
     Route::post('/tipeiks/listData',[TipeIksController::class,'listData'])->name('tipeiks.listData');
 });
 
+
+
+Route::prefix('/penjamin')->group(function(){
+    Route::get('/',[PenjaminController::class,'index'])->name('penjamin.index');
+    Route::get('/create',[PenjaminController::class,'create'])->name('penjamin.create');
+    Route::post('/store',[PenjaminController::class,'store'])->name('penjamin.store');
+    Route::get('{id}/edit/',[PenjaminController::class,'edit'])->name('penjamin.edit');
+    Route::post('{id}/update',[PenjaminController::class,'update'])->name('penjamin.update');
+    Route::delete('/{id}',[PenjaminController::class,'deleteData'])->name('penjamin.delete');
+    Route::post('/penjamin/listData',[PenjaminController::class,'listData'])->name('penjamin.listData');
+});
