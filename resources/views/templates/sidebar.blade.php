@@ -32,9 +32,9 @@
                                     </a>
                                 </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item">
-                                    <a href="{{URL('/crud3')}}" class="nk-menu-link">
+                                    <a href="{{URL('/iks')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-linux-server"></em></span>
-                                        <span class="nk-menu-text">Example 3</span>
+                                        <span class="nk-menu-text">Ikatan</span>
                                     </a>
                                 </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item">

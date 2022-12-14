@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CrudController;
+use App\Http\Controllers\IksController;
 use App\Http\Controllers\PenjaminController;
 use App\Http\Controllers\KomponenGroupsController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,7 @@ use App\Http\Controllers\TipeIksController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/',function(){
     return redirect('/crud');
 });
@@ -57,4 +59,15 @@ Route::prefix('/komponengroups')->group(function(){
     Route::post('/{id}/update',[KomponenGroupsController::class,'update'])->name('komponengroups.update');
     Route::delete('/{id}',[KomponenGroupsController::class,'deleteData'])->name('komponengroups.delete');
     Route::post('/listData',[KomponenGroupsController::class,'listData'])->name('komponengroups.listData');
+});
+
+
+Route::prefix('/iks')->group(function(){
+    Route::get('/',[IksController::class,'index'])->name('iks.index');
+    Route::get('/create',[IksController::class,'create'])->name('iks.create');
+    Route::post('/store',[IksController::class,'store'])->name('iks.store');
+    Route::get('/edit/{id}',[IksController::class,'edit'])->name('iks.edit');
+    Route::patch('/update',[IksController::class,'update'])->name('iks.update');
+    Route::delete('/{id}',[IksController::class,'deleteData'])->name('iks.delete');
+    Route::post('/listData',[IksController::class,'listData'])->name('iks.listData');
 });
