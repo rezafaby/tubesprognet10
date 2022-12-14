@@ -12,6 +12,7 @@ class IKSController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     */
     public function index() {
         $icon = 'ni ni-dashlite';
         $subtitle = 'IKS';
