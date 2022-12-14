@@ -43,6 +43,13 @@
                                         <span class="nk-menu-text">Data Tipe IKS</span>
                                     </a>
                                 </li><!-- .nk-menu-item -->
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-item">
+                                <a href="{{URL('/komponengroups')}}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-coins"></em></span>
+                                    <span class="nk-menu-text">Komponen Groups</span>
+                                </a>
+                            </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-heading">
                                     <h6 class="overline-title text-primary-alt">Transactions</h6>
                                 </li><!-- .nk-menu-item -->
