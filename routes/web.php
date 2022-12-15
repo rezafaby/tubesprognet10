@@ -4,6 +4,7 @@ use App\Http\Controllers\CrudController;
 use App\Http\Controllers\IksController;
 use App\Http\Controllers\PenjaminController;
 use App\Http\Controllers\KomponenGroupsController;
+use App\Http\Controllers\KomponenGroupDetailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipeIksController;
 
@@ -39,8 +40,6 @@ Route::prefix('/tipeiks')->group(function(){
     Route::post('/tipeiks/listData',[TipeIksController::class,'listData'])->name('tipeiks.listData');
 });
 
-
-
 Route::prefix('/penjamin')->group(function(){
     Route::get('/',[PenjaminController::class,'index'])->name('penjamin.index');
     Route::get('/create',[PenjaminController::class,'create'])->name('penjamin.create');
@@ -49,6 +48,16 @@ Route::prefix('/penjamin')->group(function(){
     Route::post('{id}/update',[PenjaminController::class,'update'])->name('penjamin.update');
     Route::delete('/{id}',[PenjaminController::class,'deleteData'])->name('penjamin.delete');
     Route::post('/penjamin/listData',[PenjaminController::class,'listData'])->name('penjamin.listData');
+});
+
+Route::prefix('/iks')->group(function(){
+    Route::get('/',[IksController::class,'index'])->name('iks.index');
+    Route::get('/create',[IksController::class,'create'])->name('iks.create');
+    Route::post('/store',[IksController::class,'store'])->name('iks.store');
+    Route::get('/edit/{id}',[IksController::class,'edit'])->name('iks.edit');
+    Route::patch('/update',[IksController::class,'update'])->name('iks.update');
+    Route::delete('/{id}',[IksController::class,'deleteData'])->name('iks.delete');
+    Route::post('/listData',[IksController::class,'listData'])->name('iks.listData');
 });
 
 Route::prefix('/komponengroups')->group(function(){
@@ -61,13 +70,11 @@ Route::prefix('/komponengroups')->group(function(){
     Route::post('/listData',[KomponenGroupsController::class,'listData'])->name('komponengroups.listData');
 });
 
-
-Route::prefix('/iks')->group(function(){
-    Route::get('/',[IksController::class,'index'])->name('iks.index');
-    Route::get('/create',[IksController::class,'create'])->name('iks.create');
-    Route::post('/store',[IksController::class,'store'])->name('iks.store');
-    Route::get('/edit/{id}',[IksController::class,'edit'])->name('iks.edit');
-    Route::patch('/update',[IksController::class,'update'])->name('iks.update');
-    Route::delete('/{id}',[IksController::class,'deleteData'])->name('iks.delete');
-    Route::post('/listData',[IksController::class,'listData'])->name('iks.listData');
+Route::prefix('/komponengroupdetail')->group(function(){
+    Route::get('/index/{id?}',[KomponenGroupDetailController::class,'index'])->name('komponengroupdetail.index');
+    Route::get('/create',[KomponenGroupDetailController::class,'create'])->name('komponengroupdetail.create');
+    Route::post('/store',[KomponenGroupDetailController::class,'store'])->name('komponengroupdetail.store');
+    Route::get('/edit/{id}',[KomponenGroupDetailController::class,'edit'])->name('komponengroupdetail.edit');
+    Route::post('/{id}/update',[KomponenGroupDetailController::class,'update'])->name('komponengroupdetail.update');
+    Route::delete('/delete',[KomponenGroupDetailController::class,'destroy'])->name('komponengroupdetail.delete');
 });

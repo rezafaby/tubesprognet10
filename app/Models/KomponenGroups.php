@@ -13,4 +13,8 @@ class KomponenGroups extends Model
     protected $fillable = [
         'group',
     ];
+
+    public function KomponenGroupDetail(){
+        return $this->hasMany(KomponenGroupDetail::class,'gkomponen_id','id');
+    }
 }
