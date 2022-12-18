@@ -18,37 +18,84 @@
                             <ul class="nk-menu">
                                 <li class="nk-menu-heading">
                                     <h6 class="overline-title text-primary-alt">Master Data</h6>
-                                </li><!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
+                                </li>
+                                {{-- <li class="nk-menu-item">
                                     <a href="{{URL('/crud')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-dashlite"></em></span>
                                         <span class="nk-menu-text">CRUD Example</span>
                                     </a>
-                                </li><!-- .nk-menu-item -->
+                                </li>
                                 <li class="nk-menu-item">
                                     <a href="{{URL('/penjamin')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-layers-fill"></em></span>
                                         <span class="nk-menu-text">Data Penjamin</span>
                                     </a>
-                                </li><!-- .nk-menu-item -->
+                                </li>
                                 <li class="nk-menu-item">
                                     <a href="{{URL('/iks')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-linux-server"></em></span>
                                         <span class="nk-menu-text">Ikatan</span>
                                     </a>
-                                </li><!-- .nk-menu-item -->
+                                </li>
                                 <li class="nk-menu-item">
                                     <a href="{{URL('/tipeiks')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-coins"></em></span>
                                         <span class="nk-menu-text">Data Tipe IKS</span>
                                     </a>
-                                </li><!-- .nk-menu-item -->
-                            </li><!-- .nk-menu-item -->
+                                </li>
+                            </li>  --}}
+                            
+                            
                             <li class="nk-menu-item">
+                                <a href="{{URL('/iks')}}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-files"></em></span>
+                                    <span class="nk-menu-text">Manajemen IKS</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="{{URL('/iks')}}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Data IKS</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{URL('/penjamin')}}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Data Penjamin</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{URL('/tipeiks')}}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Data Tipe</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            
+                            <li class="nk-menu-item">
+                                <a href="{{URL('/komponengroups')}}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-layers-fill"></em></span>
+                                    <span class="nk-menu-text">Manajemen Komponen IKS</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="{{URL('/komponengroups')}}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Data Komponen Group</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{URL('/komponengroupdetail')}}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Data Komponen Group Detail</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            {{-- <li class="nk-menu-item">
                                 <a href="{{URL('/komponengroups')}}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-coins"></em></span>
                                     <span class="nk-menu-text">Komponen Groups</span>
-                                </a>
+                                </a> --}}
+
                             </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-heading">
                                     <h6 class="overline-title text-primary-alt">Transactions</h6>

@@ -20,7 +20,7 @@ use App\Http\Controllers\TipeIksController;
 */
 
 Route::get('/',function(){
-    return redirect('/crud');
+    return redirect('/iks');
 });
 
 
@@ -55,7 +55,7 @@ Route::prefix('/iks')->group(function(){
     Route::get('/create',[IksController::class,'create'])->name('iks.create');
     Route::post('/store',[IksController::class,'store'])->name('iks.store');
     Route::get('/edit/{id}',[IksController::class,'edit'])->name('iks.edit');
-    Route::patch('/update',[IksController::class,'update'])->name('iks.update');
+    Route::post('{id}/update',[IksController::class,'update'])->name('iks.update');
     Route::delete('/{id}',[IksController::class,'deleteData'])->name('iks.delete');
     Route::post('/listData',[IksController::class,'listData'])->name('iks.listData');
 });
@@ -71,10 +71,11 @@ Route::prefix('/komponengroups')->group(function(){
 });
 
 Route::prefix('/komponengroupdetail')->group(function(){
-    Route::get('/index/{id?}',[KomponenGroupDetailController::class,'index'])->name('komponengroupdetail.index');
+    Route::get('/',[KomponenGroupDetailController::class,'index'])->name('komponengroupdetail.index');
     Route::get('/create',[KomponenGroupDetailController::class,'create'])->name('komponengroupdetail.create');
     Route::post('/store',[KomponenGroupDetailController::class,'store'])->name('komponengroupdetail.store');
     Route::get('/edit/{id}',[KomponenGroupDetailController::class,'edit'])->name('komponengroupdetail.edit');
     Route::post('/{id}/update',[KomponenGroupDetailController::class,'update'])->name('komponengroupdetail.update');
-    Route::delete('/delete',[KomponenGroupDetailController::class,'destroy'])->name('komponengroupdetail.delete');
+    Route::delete('/{id}',[KomponenGroupDetailController::class,'deleteData'])->name('komponengroupdetail.delete');
+    Route::post('/listData',[KomponenGroupDetailController::class,'listData'])->name('komponengroupdetail.listData');
 });

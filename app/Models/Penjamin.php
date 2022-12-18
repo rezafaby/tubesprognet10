@@ -15,4 +15,9 @@ class Penjamin extends Model
         'nama',
         'prefix_antrean',
     ];
+
+    public function IKS(){
+        return $this->hasMany(IKS::class,'penjamin_id','id');
+    }
+
 }

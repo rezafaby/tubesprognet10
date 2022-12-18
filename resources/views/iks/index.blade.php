@@ -50,6 +50,8 @@
                             <th width="10%">Nama</th>
                             <th width="1%">Penjamin</th>
                             <th width="10%">Tipe</th>
+                            <th width="10%">Masa Berlaku Awal</th>
+                            <th width="10%">Masa Berlaku Akhir</th>
                             <th width="10%">Aksi</th>
                         </thead>
                         <tbody></tbody>
@@ -95,18 +97,32 @@ $(document).ready(function() {
                 class: 'text-left'
             },
             {
-                data: 'penjamin_id',
-                name: 'penjamin_id',
+                data: 'Penjamin.nama',
+                name: 'Penjamin.nama',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
             },
             {
-                data: 'tipe_id',
-                name: 'tipe_id',
+                data: 'TipeIks.nama',
+                name: 'TipeIks.nama',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
+            },
+            {
+                data: 'masa_berlaku_awal',
+                name: 'masa_berlaku_awal',
+                orderable: false,
+                searchable: false,
+                class: 'text-center'
+            },
+            {
+                data: 'masa_berlaku_akhir',
+                name: 'masa_berlaku_akhir',
+                orderable: false,
+                searchable: false,
+                class: 'text-center'
             },
             {
                 data: 'aksi',
@@ -114,7 +130,7 @@ $(document).ready(function() {
                 orderable: false,
                 searchable: false,
                 class: 'text-center'
-            }
+            },
         ],
     });
     

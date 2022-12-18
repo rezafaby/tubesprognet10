@@ -14,19 +14,62 @@ class KomponenGroupDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(int $id = null)
-    {
-        $icon = 'ni ni-dashlite';
-        $subtitle = 'Komponen Group Detail';
-        $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->get();
-        if(!is_null($id)){
-            $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->where('gkomponen_id',$id)->get();
-        }else{
-            $data = KomponenGroupDetail::all();
-        }
+    // public function index(int $id = null)
+    // {
+    //     $icon = 'ni ni-dashlite';
+    //     $subtitle = 'Komponen Group Detail';
+    //     $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->get();
+    //     if(!is_null($id)){
+    //         $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->where('gkomponen_id',$id)->get();
+    //     }else{
+    //         $data = KomponenGroupDetail::all();
+    //     }
         
-        return view('komponengroupdetail.index',compact('subtitle','icon','data'));
+    //     return view('komponengroupdetail.index',compact('subtitle','icon','data'));
+    // }
+
+    public function index() {
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Komponen Groups Detail';
+        $table_id = 'tbm_komponengroupdetail';
+        $group = KomponenGroups::all();
+        return view('komponengroupdetail.index',compact('subtitle','table_id','icon','group'));
     }
+
+    public function listData(Request $request){
+        // $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->get();
+        // if(!is_null($id)){
+        //     $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->where('gkomponen_id',$id)->get();
+        // }else{
+        //     $data = KomponenGroupDetail::all();
+        // }
+        $data = KomponenGroupDetail::with('KomponenGroups');
+        $datatables = DataTables::of($data);
+        return $datatables
+                ->addIndexColumn()
+                ->EditColumn('KomponenGroups.group', function($data){
+                    return $data->KomponenGroups->group;
+                })
+                ->addColumn('aksi', function($data){
+                    $aksi = "";
+                    $aksi .= "<a title='Edit Data' href='/komponengroupdetail/edit/".$data->id."' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",\"{$data->gkomponen_detail}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' data-nama='{$data->gkomponen_detail}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
+                    return $aksi;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+    }
+
+    public function deleteData(Request $request){
+        if(KomponenGroupDetail::destroy($request->id)){
+            $response = array('success'=>1,'msg'=>'Berhasil hapus data');
+        }else{
+            $response = array('success'=>2,'msg'=>'Gagal menghapus data');
+        }
+        return $response;
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -76,7 +119,7 @@ class KomponenGroupDetailController extends Controller
         $subtitle = 'Edit Data Komponen Group Detail';
         $data = KomponenGroupDetail::find($id);
         $gkomponen = KomponenGroups::all();
-        return view('komponengroupdetail.edit',compact(['icon','subtitle','data','gkomponen']));
+        return view('komponengroupdetail.edit',compact('icon','subtitle','data','gkomponen'));
     }
 
     /**
@@ -99,9 +142,9 @@ class KomponenGroupDetailController extends Controller
      * @param  \App\Models\KomponenGroupDetail  $komponenGroupDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KomponenGroupDetail $komponenGroupDetail, Request $request)
-    {
-        KomponenGroupDetail::find($request->id)->delete();
-        return redirect()->route('komponengroupdetail.index');
-    }
+    // public function destroy(KomponenGroupDetail $komponenGroupDetail, Request $request)
+    // {
+    //     KomponenGroupDetail::find($request->id)->delete();
+    //     return redirect()->route('komponengroupdetail.index');
+    // }
 }

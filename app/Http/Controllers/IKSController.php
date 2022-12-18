@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\IKS;
+use App\Models\Penjamin;
+use App\Models\TipeIks;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -21,13 +23,19 @@ class IKSController extends Controller
     }
 
     public function listData(Request $request){
-        $data = IKS::all();
+        $data = IKS::with('Penjamin', 'TipeIks');
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
+                ->EditColumn('Penjamin.nama', function($data){
+                    return $data->Penjamin->nama;
+                })
+                ->EditColumn('TipeIks.nama', function($data){
+                    return $data->TipeIks->nama;
+                })
                 ->addColumn('aksi', function($data){
                     $aksi = "";
-                    $aksi .= "<a title='Edit Data' href='/crud/".$data->id."/edit' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                    $aksi .= "<a title='Edit Data' href='/iks/edit/".$data->id."' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",\"{$data->nama}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' data-nama='{$data->nama}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
                 })
@@ -47,13 +55,32 @@ class IKSController extends Controller
     public function create() {
         $icon = 'ni ni-dashlite';
         $subtitle = 'Tambah Data Ikatan';
-        return view('create',compact('subtitle','icon'));
+        $penjamin = Penjamin::all();
+        $tiks = TipeIks::all();
+        return view('iks.create',compact('subtitle','icon','penjamin','tiks'));
+    }
+
+    public function store(Request $request)
+    {
+        IKS::create($request->all());
+        return redirect()->route('iks.index');
     }
   
-    public function edit(IKS $iKS) {
-        $data = IKS::find($request->id);
+
+    public function edit(IKS $iKS, $id)
+    {
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Edit Data Ikatan';
-        return view('edit',compact('subtitle','icon','data'));
+        $subtitle = 'Edit Data IKS';
+        $data = IKS::find($id);
+        $penjamin = Penjamin::all();
+        $tiks = TipeIks::all();
+        return view('iks.edit',compact(['icon','subtitle','data','penjamin','tiks']));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = IKS::find($id);
+        $data->fill($request->all())->save();
+        return redirect()->route('iks.index');
     }
 }

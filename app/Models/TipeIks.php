@@ -13,4 +13,8 @@ class TipeIks extends Model
         'kode',
         'nama',
     ];
+
+    public function IKS(){
+        return $this->hasMany(IKS::class,'tipe_id','id');
+    }
 }

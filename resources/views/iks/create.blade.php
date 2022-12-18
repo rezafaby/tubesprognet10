@@ -55,38 +55,32 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-                <form id="form" action="{{ route('iks.update', $data->id)}}" method="POST" enctype="multipart/form-data">
+                <form id="form" action="{{ route('iks.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Kode</label>
-                    <input class="form-control" id="group" name="kode"  value="{{ $data->kode }}" required>
+                    <input class="form-control" id="group" name="kode"  placeholder="Masukkan Kode" required>
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama Provider</label>
-                    <input class="form-control" id="group" name="nama"  value="{{ $data->nama }}" required>
+                    <input class="form-control" id="group" name="nama"  placeholder="Masukkan Nama Provider" required>
                   </div>
                 <div class="mb-3">
                     <label for="sel1" class="form-label">Penjamin :</label>
                     <select class="form-control" id="penjamin" name="penjamin_id" required>
-                        @foreach($penjamin as $pj)
-                            <option value="{{$pj->id}}"
-                                @if($pj->id == $data->penjamin_id)
-                                    SELECTED
-                                    @endif
-                            >{{$pj->nama}}</option>
-                        @endforeach
-                    </select>
+                        <option value="0" disabled >Pilih Penjamin</option>
+                            @foreach($penjamin as $pj)
+                                <option value="{{$pj->id}}">{{$pj->nama}}</option>
+                            @endforeach
+                        </select>
                 </div>
 
                 <div class="mb-3">
                     <label for="sel1" class="form-label">Tipe IKS :</label>
                     <select class="form-control" id="tiks" name="tipe_id" required>
+                        <option value="0" disabled >Pilih Tipe IKS</option>
                         @foreach($tiks as $ti)
-                            <option value="{{$ti->id}}"
-                                @if($ti->id == $data->tipe_id)
-                                    SELECTED
-                                    @endif
-                            >{{$ti->nama}}</option>
+                            <option value="{{$ti->id}}">{{$ti->nama}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -94,20 +88,20 @@
                 <div class="mb-3">
                     <div class="form-group">
                         <label for="">Masa Berlaku Awal</label>
-                        <input type="date" name="masa_berlaku_awal" maxlength="10" class="form-control bg-se" id="datepicker" value="{{ $data->masa_berlaku_awal }}" required>
+                        <input type="date" name="masa_berlaku_awal" maxlength="10" class="form-control bg-se" id="datepicker" required>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <div class="form-group">
                         <label for="">Masa Berlaku Akhir</label>
-                        <input type="date" name="masa_berlaku_akhir" maxlength="10" class="form-control bg-se" id="datepicker" value="{{ $data->masa_berlaku_akhir }}" required>
+                        <input type="date" name="masa_berlaku_akhir" maxlength="10" class="form-control bg-se" id="datepicker" required>
                     </div>
                 </div>
 
                   <div class="nk-fmg-actions">
                     <div class="btn-group">
-                        <button type="submit" class="btn btn-sm btn-primary"><span>Update</span></button>
+                        <button type="submit" class="btn btn-sm btn-primary"><span>Submit</span></button>
                     </div>
                 </div>
             </form>
@@ -123,20 +117,31 @@
             e.preventDefault();
 
             CustomSwal.fire({
-            text: 'Yakin ingin mengubah data?',
+                text: 'Yakin ingin menambahkan data?',
             icon:'question',
             showCancelButton: true,
-            confirmButtonText: 'Update',
+            confirmButtonText: 'Submit',
             cancelButtonText: 'Batal',
             }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 form.submit();
-                CustomSwal.fire('Sukses', 'Berhasil Mengubah Data!', 'success')
+                CustomSwal.fire('Sukses', 'Berhasil Menambahkan Data!', 'success')
             } else if (result.isDenied) {
-                CustomSwal.fire('Batal', 'Batal Mengubah Data', 'info')
+                CustomSwal.fire('Batal', 'Batal Menambahkan Data', 'info')
             }
         })
+    });
+
+    //Date range picker
+    $('#datepicker').daterangepicker()
+    //Date range picker with time picker
+    $('#datepicker').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+        }
     });
 
 </script>
