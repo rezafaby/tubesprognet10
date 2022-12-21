@@ -14,27 +14,27 @@ class KomponenGroupDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(int $id = null)
-    {
-        $icon = 'ni ni-dashlite';
-        $subtitle = 'Komponen Group Detail';
-        $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->get();
-        if(!is_null($id)){
-            $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->where('gkomponen_id',$id)->get();
-        }else{
-            $data = KomponenGroupDetail::all();
-        }
-        
-        return view('komponengroupdetail.index',compact('subtitle','icon','data'));
-    }
-
-    // public function index() {
+    // public function index(int $id = null)
+    // {
     //     $icon = 'ni ni-dashlite';
-    //     $subtitle = 'Komponen Groups Detail';
-    //     $table_id = 'tbm_komponengroupdetail';
-    //     $group = KomponenGroups::all();
-    //     return view('komponengroupdetail.index',compact('subtitle','table_id','icon'));
+    //     $subtitle = 'Komponen Group Detail';
+    //     $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->get();
+    //     if(!is_null($id)){
+    //         $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->where('gkomponen_id',$id)->get();
+    //     }else{
+    //         $data = KomponenGroupDetail::all();
+    //     }
+        
+    //     return view('komponengroupdetail.index',compact('subtitle','icon','data'));
     // }
+
+    public function index() {
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Komponen Groups Detail';
+        $table_id = 'tbm_komponengroupdetail';
+        // $group = KomponenGroups::all();
+        return view('komponengroupdetail.index',compact('subtitle','table_id','icon'));
+    }
 
     public function listData(Request $request, int $id = null){
         // $data = KomponenGroupDetail::with('KomponenGroups');

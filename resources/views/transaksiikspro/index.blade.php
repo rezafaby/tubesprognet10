@@ -46,7 +46,7 @@
                     <table id="{{$table_id}}" class="small-table table " style="width:100%">
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
                             <th width="1%">No.</th>
-                            <th width="10%">IKS ID</th>
+                            <th width="10%">Nama IKS</th>
                             <th width="10%">Nomor IKS</th>
                             <th width="10%">Nama IKS</th>
                             <th width="10%">Tanggal Awal</th>
@@ -83,8 +83,8 @@ $(document).ready(function() {
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },         
             {
-                data: 'Iks.nama',
-                name: 'Iks.nama',
+                data: 'IKS.nama',
+                name: 'IKS.nama',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'

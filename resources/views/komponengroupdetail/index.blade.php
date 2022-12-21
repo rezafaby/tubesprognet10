@@ -1,6 +1,6 @@
 {{-- https://www.positronx.io/laravel-datatables-example/ --}}
 
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 @section('action')
 
 @endsection
@@ -106,7 +106,7 @@ function deletePeminjams(index){
         })
     };
 </script>
-@endpush
+@endpush --}}
 
 
 
@@ -114,7 +114,7 @@ function deletePeminjams(index){
 
 {{-- https://www.positronx.io/laravel-datatables-example/ --}}
 
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 @section('action')
 
 @endsection
@@ -270,4 +270,4 @@ function deleteData(id,name,elm){
 }
 
 </script>
-@endpush --}}
+@endpush

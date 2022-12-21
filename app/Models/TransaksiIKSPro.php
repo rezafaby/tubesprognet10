@@ -19,7 +19,7 @@ class TransaksiIKSPro extends Model
         'iks_file',
     ];
 
-    public function Iks(){
+    public function IKS(){
         return $this->belongsTo(IKS::class,'iks_id','id');
     }
 }

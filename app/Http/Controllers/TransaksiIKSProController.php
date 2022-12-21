@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TransaksiIKSPro;
 use App\Models\IKS;
+use Yajra\DataTables\Facades\DataTables;
 
 class TransaksiIKSProController extends Controller
 {
@@ -23,12 +24,12 @@ class TransaksiIKSProController extends Controller
     }
 
     public function listData(Request $request){
-        $data = TransaksiIKSPro::with('Iks');
+        $data = TransaksiIKSPro::with('IKS');
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
-                ->EditColumn('Iks.nama', function($data){
-                    return $data->Iks->nama;
+                ->EditColumn('IKS.nama', function($data){
+                    return $data->IKS->nama;
                 })
                 ->addColumn('aksi', function($data){
                     $aksi = "";
