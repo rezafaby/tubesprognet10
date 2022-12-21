@@ -81,6 +81,9 @@ class TipeIksController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'kode'=>'required|unique:m_iks_tipe',
+        ]);
         $data = $request->all();
         TipeIks::create($data);
         session()->flash('message',$data['nama'].'  Berhasil Ditambahkan');

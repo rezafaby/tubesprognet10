@@ -55,11 +55,17 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
+                @if($errors->any())
+                    @foreach($errors->all() as $err)
+                        <p class="alert alert-danger">{{ $err }}</p>
+                    @endforeach
+                @endif
                 <form id="form" action="{{route('tipeiks.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Kode</label>
-                    <input class="form-control" readonly="" value="{{$kd}}" id="kode" name="kode" placeholder="Masukkan Kode" required>
+                    <!-- <input class="form-control" readonly="" value="{{$kd}}" id="kode" name="kode" placeholder="Masukkan Kode" required> -->
+                    <input class="form-control" id="kode" name="kode" placeholder="Masukkan Kode" required>
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama</label>
@@ -92,7 +98,7 @@
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 form.submit();
-                // CustomSwal.fire('Sukses', 'Berhasil Menambahkan Data!', 'success')
+                //CustomSwal.fire('Sukses', 'Berhasil Menambahkan Data!', 'success')
             } else if (result.isDenied) {
                 CustomSwal.fire('Batal', 'Batal Menambahkan Data', 'info')
             }
