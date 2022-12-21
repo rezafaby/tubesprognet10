@@ -26,4 +26,8 @@ class IKS extends Model
     public function TipeIks(){
         return $this->belongsTo(TipeIks::class,'tipe_id','id');
     }
+
+    public function TransaksiIKSPro(){
+        return $this->hasMany(TransaksiIKSPro::class,'iks_id','id');
+    }
 }

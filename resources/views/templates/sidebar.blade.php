@@ -101,15 +101,22 @@
                                     <h6 class="overline-title text-primary-alt">Transactions</h6>
                                 </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item">
-                                    <a href="{{URL('/trx1')}}" class="nk-menu-link">
+                                    <a href="{{URL('/transaksiikspro')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
-                                        <span class="nk-menu-text">Trx 1</span><!-- <span class="nk-menu-badge">HOT</span> -->
+                                        <span class="nk-menu-text">Transaksi IKS Provider</span><!-- <span class="nk-menu-badge">HOT</span> -->
                                     </a>
                                 </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item">
                                     <a href="{{URL('/trx2')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
-                                        <span class="nk-menu-text">Trx 2</span><!-- <span class="nk-menu-badge">HOT</span> -->
+                                        <span class="nk-menu-text">Transaksi Komponen IKS</span><!-- <span class="nk-menu-badge">HOT</span> -->
+                                    </a>
+                                </li><!-- .nk-menu-item -->
+                                </li><!-- .nk-menu-item -->
+                                <li class="nk-menu-item">
+                                    <a href="{{URL('/trx2')}}" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
+                                        <span class="nk-menu-text">Transaksi Komponen IKS Detail</span><!-- <span class="nk-menu-badge">HOT</span> -->
                                     </a>
                                 </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-heading">

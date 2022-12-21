@@ -5,6 +5,7 @@ use App\Http\Controllers\IksController;
 use App\Http\Controllers\PenjaminController;
 use App\Http\Controllers\KomponenGroupsController;
 use App\Http\Controllers\KomponenGroupDetailController;
+use App\Http\Controllers\TransaksiIKSProController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipeIksController;
 
@@ -78,4 +79,14 @@ Route::prefix('/komponengroupdetail')->group(function(){
     Route::post('/{id}/update',[KomponenGroupDetailController::class,'update'])->name('komponengroupdetail.update');
     Route::delete('/{id}',[KomponenGroupDetailController::class,'deleteData'])->name('komponengroupdetail.delete');
     Route::post('/listData',[KomponenGroupDetailController::class,'listData'])->name('komponengroupdetail.listData');
+});
+
+Route::prefix('/transaksiikspro')->group(function(){
+    Route::get('/',[TransaksiIKSProController::class,'index'])->name('transaksiikspro.index');
+    Route::get('/create',[TransaksiIKSProController::class,'create'])->name('transaksiikspro.create');
+    Route::post('/store',[TransaksiIKSProController::class,'store'])->name('transaksiikspro.store');
+    Route::get('/edit/{id}',[TransaksiIKSProController::class,'edit'])->name('transaksiikspro.edit');
+    Route::post('/{id}/update',[TransaksiIKSProController::class,'update'])->name('transaksiikspro.update');
+    Route::delete('/{id}',[TransaksiIKSProController::class,'deleteData'])->name('transaksiikspro.delete');
+    Route::post('/listData',[TransaksiIKSProController::class,'listData'])->name('transaksiikspro.listData');
 });
