@@ -123,6 +123,9 @@ class TipeIksController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'kode'=>'required|unique:m_iks_tipe,kode,'.$id,
+        ]);
         $data = TipeIks::find($id);
         $data->fill($request->all())->save();
         session()->flash('message',$data['nama'].'  Berhasil Diubah');

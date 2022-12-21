@@ -1,4 +1,4 @@
-{{-- https://www.positronx.io/laravel-datatables-example/ --}}
+<!-- {{-- https://www.positronx.io/laravel-datatables-example/ --}}
 
 {{-- @extends('layouts.app')
 @section('action')
@@ -11,7 +11,7 @@
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
-            <a href="{{ route('komponengroupdetail.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            <a href="{{ route('komponengroupdetail.create', ['id' => $id]) }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
         </div>
     </div>
 </div>
@@ -36,10 +36,10 @@
             
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- <div class="nk-fmg-body-content"> -->
-    <div class="nk-fmg-quick-list nk-block">
+    <!-- <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
                 @if(session()->exists('message'))
@@ -82,10 +82,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 <!-- </div> -->
 
-@endsection
+<!-- @endsection
 @push('script')
 <script>
 function deletePeminjams(index){
@@ -106,7 +106,7 @@ function deletePeminjams(index){
         })
     };
 </script>
-@endpush --}}
+@endpush --}} -->
 
 
 
@@ -125,7 +125,11 @@ function deletePeminjams(index){
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
-            <a href="{{ route('komponengroupdetail.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            @if($id != 0)
+                <a href="{{ route('komponengroupdetail.createSpesific', ['id' => $id]) }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            @else
+                <a href="{{ route('komponengroupdetail.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            @endif
         </div>
     </div>
 </div>
@@ -189,7 +193,7 @@ $(document).ready(function() {
         serverSide: true,
         dom: '<"row justify-between g-2 "<"col-7 col-sm-4 text-left"f><"col-5 col-sm-8 text-right"<"datatable-filter"<"d-flex justify-content-end g-2" l>>>><" my-3"t><"row align-items-center"<"col-5 col-sm-12 col-md-6 text-left text-md-left"i><"col-5 col-sm-12 col-md-6 text-md-right"<"d-flex justify-content-end "p>>>',
         ajax: {
-            url: '{{ route("komponengroupdetail.listData") }}',
+            url: '{{ route("komponengroupdetail.listData", ["id" => $id]) }}',
             type:"POST",
             data: function(params) {
                 params._token = "{{ csrf_token() }}";

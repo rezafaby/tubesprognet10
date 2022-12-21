@@ -28,18 +28,20 @@ class KomponenGroupDetailController extends Controller
     //     return view('komponengroupdetail.index',compact('subtitle','icon','data'));
     // }
 
-    public function index() {
+    public function index($id = 0) {
         $icon = 'ni ni-dashlite';
         $subtitle = 'Komponen Groups Detail';
         $table_id = 'tbm_komponengroupdetail';
+        // dd($id);
         // $group = KomponenGroups::all();
-        return view('komponengroupdetail.index',compact('subtitle','table_id','icon'));
+        return view('komponengroupdetail.index',compact('subtitle','table_id','icon','id'));
+
     }
 
-    public function listData(Request $request, int $id = null){
+    public function listData(Request $request, $id){
         // $data = KomponenGroupDetail::with('KomponenGroups');
         $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->get();
-        if(!is_null($id)){
+        if(($id!=0)){
             $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->where('gkomponen_id',$id)->get();
         }else{
             // $data = KomponenGroupDetail::all();
@@ -85,6 +87,14 @@ class KomponenGroupDetailController extends Controller
         return view('komponengroupdetail.create',compact('subtitle','icon','gkomponen'));
     }
 
+    public function createSpesific($id)
+    {
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Tambah Data Mahasiswa';
+        $gkomponen = KomponenGroups::all();
+        return view('komponengroupdetail.create',compact('subtitle','icon','gkomponen','id'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -96,7 +106,8 @@ class KomponenGroupDetailController extends Controller
         $data = $request->all();
         KomponenGroupDetail::create($data);
         session()->flash('message',$data['gkomponen_detail'].'  Berhasil Ditambahkan');
-        return redirect()->route('komponengroupdetail.index');
+        // return redirect()->route('komponengroupdetail.index');
+        return back();
     }
 
     /**

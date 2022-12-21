@@ -66,7 +66,12 @@
                     <select class="form-control" id="gkomponen" name="gkomponen_id">
                         <option value="0" disabled >Pilih Golongan Darah</option>
                         @foreach($gkomponen as $gk)
-                            <option value="{{$gk->id}}">{{$gk->group}}</option>
+                            <option value="{{$gk->id}}" 
+                                @isset($id) 
+                                    @if($gk->id == $id) selected @endif 
+                                @endisset >
+                                {{$gk->group}}
+                            </option>
                         @endforeach
                     </select>
                 </div>
