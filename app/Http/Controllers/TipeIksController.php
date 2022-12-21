@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TipeIks;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use DB;
 
 class TipeIksController extends Controller
 {
@@ -53,7 +54,23 @@ class TipeIksController extends Controller
     public function create(){
         $icon = 'ni ni-dashlite';
         $subtitle = 'Tambah Data Tipe Iks';
-        return view('tipeiks.create',compact('subtitle','icon'));
+
+        $q = DB::table('m_iks_tipe')->select(DB::raw('MAX(RIGHT(kode,1)) as kode'));
+        $kd="";
+        if($q->count()>0)
+        {
+            foreach($q->get() as $k)
+            {
+                $tmp = ((int)$k->kode)+1;
+                $kd = sprintf("%01s", $tmp);
+            }
+        }
+        else
+        {
+            $kd = "1";
+        }
+       
+        return view('tipeiks.create',compact('subtitle','icon','kd'));
     }
 
     /**

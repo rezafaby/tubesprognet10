@@ -59,7 +59,7 @@
                     @csrf
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Kode</label>
-                    <input class="form-control" id="kode" name="kode" placeholder="Masukkan Kode" required>
+                    <input class="form-control" readonly="" value="{{$kd}}" id="kode" name="kode" placeholder="Masukkan Kode" required>
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama</label>
