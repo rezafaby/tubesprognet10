@@ -132,7 +132,7 @@
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 form.submit();
-                CustomSwal.fire('Sukses', 'Berhasil Mengubah Data!', 'success')
+                // CustomSwal.fire('Sukses', 'Berhasil Mengubah Data!', 'success')
             } else if (result.isDenied) {
                 CustomSwal.fire('Batal', 'Batal Mengubah Data', 'info')
             }

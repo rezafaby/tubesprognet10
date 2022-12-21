@@ -81,7 +81,9 @@ class TipeIksController extends Controller
      */
     public function store(Request $request)
     {
-        TipeIks::create($request->all());
+        $data = $request->all();
+        TipeIks::create($data);
+        session()->flash('message',$data['nama'].'  Berhasil Ditambahkan');
         return redirect()->route('tipeiks.index');
     }
 
@@ -120,6 +122,7 @@ class TipeIksController extends Controller
     {
         $data = TipeIks::find($id);
         $data->fill($request->all())->save();
+        session()->flash('message',$data['nama'].'  Berhasil Diubah');
         return redirect()->route('tipeiks.index');
     }
 

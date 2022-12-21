@@ -14,36 +14,37 @@ class KomponenGroupDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index(int $id = null)
-    // {
-    //     $icon = 'ni ni-dashlite';
-    //     $subtitle = 'Komponen Group Detail';
-    //     $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->get();
-    //     if(!is_null($id)){
-    //         $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->where('gkomponen_id',$id)->get();
-    //     }else{
-    //         $data = KomponenGroupDetail::all();
-    //     }
-        
-    //     return view('komponengroupdetail.index',compact('subtitle','icon','data'));
-    // }
-
-    public function index() {
+    public function index(int $id = null)
+    {
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Komponen Groups Detail';
-        $table_id = 'tbm_komponengroupdetail';
-        $group = KomponenGroups::all();
-        return view('komponengroupdetail.index',compact('subtitle','table_id','icon','group'));
+        $subtitle = 'Komponen Group Detail';
+        $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->get();
+        if(!is_null($id)){
+            $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->where('gkomponen_id',$id)->get();
+        }else{
+            $data = KomponenGroupDetail::all();
+        }
+        
+        return view('komponengroupdetail.index',compact('subtitle','icon','data'));
     }
 
-    public function listData(Request $request){
-        // $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->get();
-        // if(!is_null($id)){
-        //     $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->where('gkomponen_id',$id)->get();
-        // }else{
-        //     $data = KomponenGroupDetail::all();
-        // }
-        $data = KomponenGroupDetail::with('KomponenGroups');
+    // public function index() {
+    //     $icon = 'ni ni-dashlite';
+    //     $subtitle = 'Komponen Groups Detail';
+    //     $table_id = 'tbm_komponengroupdetail';
+    //     $group = KomponenGroups::all();
+    //     return view('komponengroupdetail.index',compact('subtitle','table_id','icon'));
+    // }
+
+    public function listData(Request $request, int $id = null){
+        // $data = KomponenGroupDetail::with('KomponenGroups');
+        $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->get();
+        if(!is_null($id)){
+            $data = KomponenGroupDetail::with('KomponenGroups')->whereHas('KomponenGroups')->where('gkomponen_id',$id)->get();
+        }else{
+            // $data = KomponenGroupDetail::all();
+            $data = KomponenGroupDetail::with('KomponenGroups');
+        }
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
@@ -92,7 +93,9 @@ class KomponenGroupDetailController extends Controller
      */
     public function store(Request $request)
     {
-        KomponenGroupDetail::create($request->all());
+        $data = $request->all();
+        KomponenGroupDetail::create($data);
+        session()->flash('message',$data['gkomponen_detail'].'  Berhasil Ditambahkan');
         return redirect()->route('komponengroupdetail.index');
     }
 
@@ -133,6 +136,7 @@ class KomponenGroupDetailController extends Controller
     {
         $data = KomponenGroupDetail::find($id);
         $data->fill($request->all())->save();
+        session()->flash('message',$data['gkomponen_detail'].'  Berhasil Diubah');
         return redirect()->route('komponengroupdetail.index');
     }
 
@@ -142,9 +146,9 @@ class KomponenGroupDetailController extends Controller
      * @param  \App\Models\KomponenGroupDetail  $komponenGroupDetail
      * @return \Illuminate\Http\Response
      */
-    // public function destroy(KomponenGroupDetail $komponenGroupDetail, Request $request)
-    // {
-    //     KomponenGroupDetail::find($request->id)->delete();
-    //     return redirect()->route('komponengroupdetail.index');
-    // }
+    public function destroy(KomponenGroupDetail $komponenGroupDetail, Request $request)
+    {
+        KomponenGroupDetail::find($request->id)->delete();
+        return redirect()->route('komponengroupdetail.index');
+    }
 }

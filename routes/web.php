@@ -72,12 +72,14 @@ Route::prefix('/komponengroups')->group(function(){
 });
 
 Route::prefix('/komponengroupdetail')->group(function(){
+    Route::get('index/{id?}',[KomponenGroupDetailController::class,'index'])->name('komponengroupdetail.index');
     Route::get('/',[KomponenGroupDetailController::class,'index'])->name('komponengroupdetail.index');
     Route::get('/create',[KomponenGroupDetailController::class,'create'])->name('komponengroupdetail.create');
     Route::post('/store',[KomponenGroupDetailController::class,'store'])->name('komponengroupdetail.store');
     Route::get('/edit/{id}',[KomponenGroupDetailController::class,'edit'])->name('komponengroupdetail.edit');
     Route::post('/{id}/update',[KomponenGroupDetailController::class,'update'])->name('komponengroupdetail.update');
     Route::delete('/{id}',[KomponenGroupDetailController::class,'deleteData'])->name('komponengroupdetail.delete');
+    Route::delete('/delete',[KomponenGroupDetailController::class,'deleteData'])->name('komponengroupdetail.delete');
     Route::post('/listData',[KomponenGroupDetailController::class,'listData'])->name('komponengroupdetail.listData');
 });
 

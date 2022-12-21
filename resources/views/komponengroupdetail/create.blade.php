@@ -97,7 +97,7 @@
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 form.submit();
-                CustomSwal.fire('Sukses', 'Berhasil Menambahkan Data!', 'success')
+                // CustomSwal.fire('Sukses', 'Berhasil Menambahkan Data!', 'success')
             } else if (result.isDenied) {
                 CustomSwal.fire('Batal', 'Batal Menambahkan Data', 'info')
             }

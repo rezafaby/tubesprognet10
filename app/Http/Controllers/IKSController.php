@@ -62,7 +62,9 @@ class IKSController extends Controller
 
     public function store(Request $request)
     {
-        IKS::create($request->all());
+        $data = $request->all();
+        IKS::create($data);
+        session()->flash('message',$data['nama'].'  Berhasil Ditambahkan');
         return redirect()->route('iks.index');
     }
   
@@ -81,6 +83,7 @@ class IKSController extends Controller
     {
         $data = IKS::find($id);
         $data->fill($request->all())->save();
+        session()->flash('message',$data['nama'].'  Berhasil Diubah');
         return redirect()->route('iks.index');
     }
 }

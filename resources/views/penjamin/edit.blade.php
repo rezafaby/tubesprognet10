@@ -89,14 +89,14 @@
             CustomSwal.fire({
             text: 'Yakin ingin mengubah data?',
             icon:'question',
-            showDenyButton: true,
+            showCancelButton: true,
             confirmButtonText: 'Update',
-            denyButtonText: 'Batal',
+            cancelButtonText: 'Batal',
             }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 form.submit();
-                CustomSwal.fire('Sukses', 'Berhasil mengubah data!', 'success')
+                // CustomSwal.fire('Sukses', 'Berhasil mengubah data!', 'success')
             } else if (result.isDenied) {
                 CustomSwal.fire('Batal', 'Batal mengubah Data', 'info')
             }

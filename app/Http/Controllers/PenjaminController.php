@@ -65,7 +65,9 @@ class PenjaminController extends Controller
      */
     public function store(Request $request)
     {
-        Penjamin::create($request->all());
+        $data = $request->all();
+        Penjamin::create($data);
+        session()->flash('message',$data['nama'].'  Berhasil Ditambahkan');
         return redirect()->route('penjamin.index');
     }
 
@@ -104,6 +106,7 @@ class PenjaminController extends Controller
     {
         $data = Penjamin::find($id);
         $data->fill($request->all())->save();
+        session()->flash('message',$data['nama'].'  Berhasil Diubah');
         return redirect()->route('penjamin.index');
     }
 }
