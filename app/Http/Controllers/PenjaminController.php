@@ -65,6 +65,9 @@ class PenjaminController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'kode'=>'required|unique:m_penjamin',
+        ]);
         $data = $request->all();
         Penjamin::create($data);
         session()->flash('message',$data['nama'].'  Berhasil Ditambahkan');
@@ -104,6 +107,9 @@ class PenjaminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'kode'=>'required|unique:m_penjamin,kode,'.$id,
+        ]);
         $data = Penjamin::find($id);
         $data->fill($request->all())->save();
         session()->flash('message',$data['nama'].'  Berhasil Diubah');

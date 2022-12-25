@@ -55,6 +55,11 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
+                @if($errors->any())
+                    @foreach($errors->all() as $err)
+                        <p class="alert alert-danger">{{ $err }}</p>
+                    @endforeach
+                @endif
                 <form id="form" action="{{ route('penjamin.update', $data->id) }}" method="POST">
                     @csrf
                 <div class="mb-3">

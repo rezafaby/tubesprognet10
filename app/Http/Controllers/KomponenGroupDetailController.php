@@ -91,7 +91,7 @@ class KomponenGroupDetailController extends Controller
     {
         $icon = 'ni ni-dashlite';
         $subtitle = 'Tambah Data Mahasiswa';
-        $gkomponen = KomponenGroups::all();
+        $gkomponen = KomponenGroups::where('id', $id)->get();
         return view('komponengroupdetail.create',compact('subtitle','icon','gkomponen','id'));
     }
 
@@ -106,8 +106,8 @@ class KomponenGroupDetailController extends Controller
         $data = $request->all();
         KomponenGroupDetail::create($data);
         session()->flash('message',$data['gkomponen_detail'].'  Berhasil Ditambahkan');
-        // return redirect()->route('komponengroupdetail.index');
-        return back();
+        return redirect()->route('komponengroupdetail.index');
+        // return back();
     }
 
     /**
