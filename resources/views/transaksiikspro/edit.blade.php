@@ -83,8 +83,9 @@
                     <input type ="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir"  value="{{ $data->tanggal_akhir }}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">File IKS</label>
-                    <input  type ="file" class="form-control" id="iks_file" name="iks_file"  value="{{ $data->iks_file }}" required>
+                    <label for="exampleFormControlInput1" class="form-label">File IKS</label><br>
+                    <img src="img/{{ $data->iks_file }}" alt="fileiks" height="400px">
+                    <input  type ="file" class="form-control" id="iks_file" name="iks_file"  src="img/{{ $data->iks_file }}">
                 </div>
                   <div class="nk-fmg-actions">
                     <div class="btn-group">

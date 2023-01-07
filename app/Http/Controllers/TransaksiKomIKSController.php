@@ -42,7 +42,7 @@ class TransaksiKomIKSController extends Controller
     }
 
     public function deleteData(Request $request){
-        if(TransaksiIKSPro::destroy($request->id)){
+        if(TransaksiKomIKS::destroy($request->id)){
             $response = array('success'=>1,'msg'=>'Berhasil hapus data');
         }else{
             $response = array('success'=>2,'msg'=>'Gagal menghapus data');
@@ -109,7 +109,7 @@ class TransaksiKomIKSController extends Controller
     public function edit($id)
     {
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Edit Data Transaki Komponen IKS';
+        $subtitle = 'Edit Data Transaksi Komponen IKS';
         $data = TransaksiKomIKS::find($id);
         $tikspro = TransaksiIKSPro::all();
         $group = KomponenGroups::all();
@@ -126,14 +126,10 @@ class TransaksiKomIKSController extends Controller
     public function update(Request $request, $id)
     {
         $data = TransaksiKomIKS::find($id);
-        $group_id = $request -> group;
-        $group = KomponenGroups::find($group_id);
-        $data = new TransaksiKomIKS();
-        $data -> iks_provider_id = $request -> nama_iks;
-        $data -> iks_gkomponen_id = $request -> iks_gkomponen_id;
-        $data -> group = $group -> group;
-        $data -> save();
-        session()->flash('message',$data['group'].'  Berhasil Diupdate');
+        $group = KomponenGroups::find($request->group);
+        $dataRequest = $request->all();
+        $dataRequest['group'] = $group->group;
+        $data->fill($dataRequest)->save();
         return redirect()->route('transaksikomiks.index');
     }
 

@@ -46,8 +46,9 @@
                     <table id="{{$table_id}}" class="small-table table " style="width:100%">
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
                             <th width="1%">No.</th>
-                            <th width="10%">Nama IKS</th>
+                            <th width="10%">Nama Provider</th>
                             <th width="10%">Nomor IKS</th>
+                            <th width="10%">Nama IKS</th>
                             <th width="10%">Tanggal Awal</th>
                             <th width="10%">Tanggal AKhir</th>
                             <th width="10%">File IKS</th>
@@ -96,6 +97,13 @@ $(document).ready(function() {
                 class: 'text-left'
             },
             {
+                data: 'nama_iks',
+                name: 'nama_iks',
+                orderable: true,
+                searchable: true,
+                class: 'text-left'
+            },
+            {
                 data: 'tanggal_awal',
                 name: 'tanggal_awal',
                 orderable: true,
@@ -114,7 +122,10 @@ $(document).ready(function() {
                 name: 'iks_file',
                 orderable: false,
                 searchable: false,
-                class: 'text-center'
+                class: 'text-center',
+                render: function (data, type, full, meta) {
+      return '<img src="img/'+data+'" style="height:100px;"/>';
+                        }
             },
             {
                 data: 'aksi',

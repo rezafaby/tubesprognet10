@@ -17,7 +17,7 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDefault">Modal Default</button> -->
             <!-- <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalDefault"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
             <!-- <a href="javascript:void(0)" class="btn btn-sm btn-success" onclick="filtershow()"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
-            <a href="{{ route('transaksiikspro.index') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="{{ route('transaksikomiks.index') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
 </div>
@@ -76,7 +76,7 @@
                         <option value="0" disabled >Pilih Group Komponen ID</option>
                         @foreach($group as $g)
                         <option value="{{$g->id}}"
-                            @if($g->id == $data->id)
+                            @if($g->id == $data->iks_gkomponen_id)
                                 SELECTED
                                 @endif
                         >{{$g->id}}</option>

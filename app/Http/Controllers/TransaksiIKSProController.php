@@ -37,12 +37,18 @@ class TransaksiIKSProController extends Controller
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",\"{$data->nama_iks}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' data-nama='{$data->nama_iks}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
                 })
+                ->addColumn('file', function($data){
+                    return '<img src="'.$data->iks_file.'" border="0" width="40" class="img-rounded" align="center" />';
+                })
                 ->rawColumns(['aksi'])
                 ->make(true);
     }
 
     public function deleteData(Request $request){
+        
         if(TransaksiIKSPro::destroy($request->id)){
+            $file = $request->iks_file;
+            File::delete($request['file']);
             $response = array('success'=>1,'msg'=>'Berhasil hapus data');
         }else{
             $response = array('success'=>2,'msg'=>'Gagal menghapus data');
@@ -73,15 +79,15 @@ class TransaksiIKSProController extends Controller
         $file = $request->iks_file;
         $namafile = $file->getClientOriginalName();
         
-            $upload = new TransaksiIKSPro;
-            $upload->iks_id = $request->iks_id;
-            $upload->nomor_iks = $request->nomor_iks;
-            $upload->tanggal_awal = $request->tanggal_awal;
-            $upload->tanggal_akhir = $request->tanggal_akhir;
-            $upload->iks_file = $namafile;
-            
-            $file->move(public_path().'/img', $namafile);
-            $upload->save();
+        $upload = new TransaksiIKSPro;
+        $upload->iks_id = $request->iks_id;
+        $upload->nomor_iks = $request->nomor_iks;
+        $upload->tanggal_awal = $request->tanggal_awal;
+        $upload->tanggal_akhir = $request->tanggal_akhir;
+        $upload->iks_file = $namafile;
+        
+        $file->move(public_path().'/img', $namafile);
+        $upload->save();
         return redirect()->route('transaksiikspro.index');
         
     }
@@ -123,7 +129,17 @@ class TransaksiIKSProController extends Controller
     public function update(Request $request, $id)
     {
         $data = TransaksiIKSPro::find($id);
-        $data->fill($request->all())->save();
+        $dataRequest = $request->all();
+
+        if($request->iks_file){
+            $file = $request->iks_file;
+            $namafile = $file->getClientOriginalName();
+            $dataRequest['iks_file'] = $namafile;
+            $file->move(public_path().'/img', $namafile);
+        }else{
+            $dataRequest['iks_file'] = $data['iks_file'];
+        }
+        $data->fill($dataRequest)->save();
         return redirect()->route('transaksiikspro.index');
     }
 

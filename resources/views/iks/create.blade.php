@@ -75,7 +75,11 @@
                     <select class="form-control" id="penjamin" name="penjamin_id" required>
                         <option value="0" disabled >Pilih Penjamin</option>
                             @foreach($penjamin as $pj)
-                                <option value="{{$pj->id}}">{{$pj->nama}}</option>
+                                @if(old('penjamin_id') == $pj->id)
+                                    <option value="{{$pj->id}}" selected>{{$pj->nama}}</option>
+                                @else
+                                    <option value="{{$pj->id}}">{{$pj->nama}}</option>
+                                @endif
                             @endforeach
                         </select>
                 </div>
@@ -85,7 +89,11 @@
                     <select class="form-control" id="tiks" name="tipe_id" required>
                         <option value="0" disabled >Pilih Tipe IKS</option>
                         @foreach($tiks as $ti)
-                            <option value="{{$ti->id}}">{{$ti->nama}}</option>
+                            @if(old('penjamin_id') == $pj->id)
+                                <option value="{{$ti->id}}" selected>{{$ti->nama}}</option>
+                            @else
+                                <option value="{{$ti->id}}">{{$ti->nama}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
