@@ -114,7 +114,7 @@
                                 </li><!-- .nk-menu-item -->
                                 </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item">
-                                    <a href="{{URL('/trx2')}}" class="nk-menu-link">
+                                    <a href="{{URL('/transaksikomiksdetail')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
                                         <span class="nk-menu-text">Transaksi Komponen IKS Detail</span><!-- <span class="nk-menu-badge">HOT</span> -->
                                     </a>

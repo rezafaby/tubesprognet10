@@ -6,10 +6,11 @@ use App\Http\Controllers\PenjaminController;
 use App\Http\Controllers\KomponenGroupsController;
 use App\Http\Controllers\KomponenGroupDetailController;
 use App\Http\Controllers\TransaksiIKSProController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipeIksController;
-
+use App\Http\Controllers\TransaksiKomIKSDetailController;
 use App\Http\Controllers\TransaksiKomIKSController;
+
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,5 +105,16 @@ Route::prefix('/transaksikomiks')->group(function(){
     Route::post('/{id}/update',[TransaksiKomIKSController::class,'update'])->name('transaksikomiks.update');
     Route::delete('/{id}',[TransaksiKomIKSController::class,'deleteData'])->name('transaksikomiks.delete');
     Route::post('/listData',[TransaksiKomIKSController::class,'listData'])->name('transaksikomiks.listData');
+});
+
+
+Route::prefix('/transaksikomiksdetail')->group(function(){
+    Route::get('/',[TransaksiKomIKSDetailController::class,'index'])->name('transaksikomiksdetail.index');
+    Route::get('/create',[TransaksiKomIKSDetailController::class,'create'])->name('transaksikomiksdetail.create');
+    Route::post('/store',[TransaksiKomIKSDetailController::class,'store'])->name('transaksikomiksdetail.store');
+    Route::get('/edit/{id}',[TransaksiKomIKSDetailController::class,'edit'])->name('transaksikomiksdetail.edit');
+    Route::post('/{id}/update',[TransaksiKomIKSDetailController::class,'update'])->name('transaksikomiksdetail.update');
+    Route::delete('/{id}',[TransaksiKomIKSDetailController::class,'deleteData'])->name('transaksikomiksdetail.delete');
+    Route::post('/listData',[TransaksiKomIKSDetailController::class,'listData'])->name('transaksikomiksdetail.listData');
 });
 

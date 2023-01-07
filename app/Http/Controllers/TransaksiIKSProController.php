@@ -59,6 +59,7 @@ class TransaksiIKSProController extends Controller
         $subtitle = 'Tambah Data Transaksi IKS Provider';
         $iks = IKS::all();
         return view('transaksiikspro.create',compact('subtitle','icon','iks'));
+        
     }
 
     /**
@@ -69,8 +70,20 @@ class TransaksiIKSProController extends Controller
      */
     public function store(Request $request)
     {
-        TransaksiIKSPro::create($request->all());
+        $file = $request->iks_file;
+        $namafile = $file->getClientOriginalName();
+        
+            $upload = new TransaksiIKSPro;
+            $upload->iks_id = $request->iks_id;
+            $upload->nomor_iks = $request->nomor_iks;
+            $upload->tanggal_awal = $request->tanggal_awal;
+            $upload->tanggal_akhir = $request->tanggal_akhir;
+            $upload->iks_file = $namafile;
+            
+            $file->move(public_path().'/img', $namafile);
+            $upload->save();
         return redirect()->route('transaksiikspro.index');
+        
     }
 
     /**
