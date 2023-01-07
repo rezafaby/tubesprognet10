@@ -64,15 +64,15 @@
                     @csrf
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Kode</label>
-                    <input class="form-control" id="kode" name="kode" placeholder="Masukkan Kode" required>
+                    <input class="form-control" id="kode" name="kode" value="{{ old('kode') }}" placeholder="Masukkan Kode" required>
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama</label>
-                    <input class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" required>
+                    <input class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama" required>
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Prefix Antrean</label>
-                    <input class="form-control" id="prefix_antrean" name="prefix_antrean" required></input>
+                    <input class="form-control" id="prefix_antrean" name="prefix_antrean" value="{{ old('prefix_antrean') }}" required></input>
                   </div>
                   <div class="nk-fmg-actions">
                     <div class="btn-group">

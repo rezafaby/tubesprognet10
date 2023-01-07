@@ -103,6 +103,14 @@ class KomponenGroupDetailController extends Controller
      */
     public function store(Request $request)
     {
+        // $pegawai_id = $request -> pegawai_id;
+        // $pegawai = Pegawai::find($pegawai_id);
+        // $gdetail = new KomponenGroupDetail();
+        // // $gdetail -> gkomponen_id = $request['gkomponen_id'];
+        // $gdetail -> gkomponen_id = $request -> gkomponen_id;
+        // $gdetail -> gkomponen_detail = $pegawai -> nama;
+        // $gdetail -> save();
+        
         $data = $request->all();
         KomponenGroupDetail::create($data);
         session()->flash('message',$data['gkomponen_detail'].'  Berhasil Ditambahkan');

@@ -64,11 +64,11 @@
                     @csrf
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Kode</label>
-                    <input class="form-control" id="group" name="kode"  placeholder="Masukkan Kode" required>
+                    <input class="form-control" id="group" name="kode" value="{{ old('kode') }}"  placeholder="Masukkan Kode" required>
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama Provider</label>
-                    <input class="form-control" id="group" name="nama"  placeholder="Masukkan Nama Provider" required>
+                    <input class="form-control" id="group" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama Provider" required>
                   </div>
                 <div class="mb-3">
                     <label for="sel1" class="form-label">Penjamin :</label>
@@ -93,14 +93,14 @@
                 <div class="mb-3">
                     <div class="form-group">
                         <label for="">Masa Berlaku Awal</label>
-                        <input type="date" name="masa_berlaku_awal" maxlength="10" class="form-control bg-se" id="datepicker" required>
+                        <input type="date" name="masa_berlaku_awal" maxlength="10" value="{{ old('masa_berlaku_awal') }}" class="form-control bg-se" id="datepicker" required>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <div class="form-group">
                         <label for="">Masa Berlaku Akhir</label>
-                        <input type="date" name="masa_berlaku_akhir" maxlength="10" class="form-control bg-se" id="datepicker" required>
+                        <input type="date" name="masa_berlaku_akhir" maxlength="10" value="{{ old('masa_berlaku_akhir') }}" class="form-control bg-se" id="datepicker" required>
                     </div>
                 </div>
 
