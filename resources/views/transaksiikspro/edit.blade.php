@@ -55,46 +55,40 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-                <form id="form" action="{{ route('transaksiikspro.store')}}" method="POST" enctype="multipart/form-data">
+                <form id="form" action="{{ route('transaksiikspro.update', $data->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                <div class="mb-3">
+                    <div class="mb-3">
                     <label for="sel1" class="form-label">Nama IKS :</label>
-                    <select class="form-control" id="iks_id" name="iks_id" required>
-                        <option value="0" disabled >Pilih Nama IKS</option>
-                            @foreach($iks as $i)
-                                <option value="{{$i->id}}">{{$i->nama}}</option>
-                            @endforeach
-                        </select>
-                </div>    
+                    <select class="form-control" id="iks" name="iks_id" required>
+                        @foreach($iks as $i)
+                            <option value="{{$i->id}}"
+                                @if($i->id == $data->iks_id)
+                                    SELECTED
+                                    @endif
+                            >{{$i->nama}}</option>
+                        @endforeach
+                    </select>
+                </div> 
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nomor IKS</label>
-                    <input class="form-control" id="nomor_iks" name="nomor_iks"  placeholder="Masukkan Nomor IKS" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nama IKS</label>
-                    <input class="form-control" id="nama_iks" name="nama_iks"  placeholder="Masukkan Nama IKS" required>
-                  </div>
-
-                <div class="mb-3">
-                    <div class="form-group">
-                        <label for="">Tanggal Awal</label>
-                        <input type="date" name="tanggal_awal" maxlength="10" class="form-control bg-se" id="datepicker" required>
-                    </div>
+                    <input class="form-control" id="nomor_iks" name="nomor_iks"  value="{{ $data->nomor_iks }}" required>
                 </div>
 
                 <div class="mb-3">
-                    <div class="form-group">
-                        <label for="">Tanggal Akhir</label>
-                        <input type="date" name="tanggal_akhir" maxlength="10" class="form-control bg-se" id="datepicker" required>
-                    </div>
+                    <label for="exampleFormControlInput1" class="form-label">Tanggal Awal</label>
+                    <input type ="date" class="form-control" id="tanggal_awal" name="tanggal_awal"  value="{{ $data->tanggal_awal }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Tanggal Akhir</label>
+                    <input type ="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir"  value="{{ $data->tanggal_akhir }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">File IKS</label>
-                    <input type = "file" class="form-control" id="iks_file" name="iks_file"  placeholder="Pilih File IKS" required>
-                  </div>
+                    <input  type ="file" class="form-control" id="iks_file" name="iks_file"  value="{{ $data->iks_file }}" required>
+                </div>
                   <div class="nk-fmg-actions">
                     <div class="btn-group">
-                        <button type="submit" class="btn btn-sm btn-primary"><span>Submit</span></button>
+                        <button type="submit" class="btn btn-sm btn-primary"><span>Update</span></button>
                     </div>
                 </div>
             </form>
@@ -110,31 +104,20 @@
             e.preventDefault();
 
             CustomSwal.fire({
-                text: 'Yakin ingin menambahkan data?',
+            text: 'Yakin ingin mengubah data?',
             icon:'question',
             showCancelButton: true,
-            confirmButtonText: 'Submit',
+            confirmButtonText: 'Update',
             cancelButtonText: 'Batal',
             }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 form.submit();
-                CustomSwal.fire('Sukses', 'Berhasil Menambahkan Data!', 'success')
+                // CustomSwal.fire('Sukses', 'Berhasil Mengubah Data!', 'success')
             } else if (result.isDenied) {
-                CustomSwal.fire('Batal', 'Batal Menambahkan Data', 'info')
+                CustomSwal.fire('Batal', 'Batal Mengubah Data', 'info')
             }
         })
-    });
-
-    //Date range picker
-    $('#datepicker').daterangepicker()
-    //Date range picker with time picker
-    $('#datepicker').daterangepicker({
-        timePicker: true,
-        timePickerIncrement: 30,
-        locale: {
-        format: 'MM/DD/YYYY hh:mm A'
-        }
     });
 
 </script>

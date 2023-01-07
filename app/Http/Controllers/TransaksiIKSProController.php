@@ -40,6 +40,15 @@ class TransaksiIKSProController extends Controller
                 ->rawColumns(['aksi'])
                 ->make(true);
     }
+
+    public function deleteData(Request $request){
+        if(TransaksiIKSPro::destroy($request->id)){
+            $response = array('success'=>1,'msg'=>'Berhasil hapus data');
+        }else{
+            $response = array('success'=>2,'msg'=>'Gagal menghapus data');
+        }
+        return $response;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -47,7 +56,7 @@ class TransaksiIKSProController extends Controller
      */
     public function create() {
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Tambah Data Ikatan';
+        $subtitle = 'Tambah Data Transaksi IKS Provider';
         $iks = IKS::all();
         return view('transaksiikspro.create',compact('subtitle','icon','iks'));
     }
@@ -81,9 +90,14 @@ class TransaksiIKSProController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TransaksiIKSPro $transaksiikspro, $id)
     {
-        //
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Edit Data Transaki IKS Provider';
+        $data = TransaksiIKSPro::find($id);
+        $iks = IKS::all();
+        $transaksiikspro = TransaksiIKSPro::all();
+        return view('transaksiikspro.edit',compact('icon','subtitle','data','transaksiikspro','iks'));
     }
 
     /**
@@ -95,7 +109,9 @@ class TransaksiIKSProController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = TransaksiIKSPro::find($id);
+        $data->fill($request->all())->save();
+        return redirect()->route('transaksiikspro.index');
     }
 
     /**
@@ -104,8 +120,5 @@ class TransaksiIKSProController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+  
 }

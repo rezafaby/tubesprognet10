@@ -9,6 +9,8 @@ use App\Http\Controllers\TransaksiIKSProController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipeIksController;
 
+use App\Http\Controllers\TransaksiKomIKSController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,3 +95,14 @@ Route::prefix('/transaksiikspro')->group(function(){
     Route::delete('/{id}',[TransaksiIKSProController::class,'deleteData'])->name('transaksiikspro.delete');
     Route::post('/listData',[TransaksiIKSProController::class,'listData'])->name('transaksiikspro.listData');
 });
+
+Route::prefix('/transaksikomiks')->group(function(){
+    Route::get('/',[TransaksiKomIKSController::class,'index'])->name('transaksikomiks.index');
+    Route::get('/create',[TransaksiKomIKSController::class,'create'])->name('transaksikomiks.create');
+    Route::post('/store',[TransaksiKomIKSController::class,'store'])->name('transaksikomiks.store');
+    Route::get('/edit/{id}',[TransaksiKomIKSController::class,'edit'])->name('transaksikomiks.edit');
+    Route::post('/{id}/update',[TransaksiKomIKSController::class,'update'])->name('transaksikomiks.update');
+    Route::delete('/{id}',[TransaksiKomIKSController::class,'deleteData'])->name('transaksikomiks.delete');
+    Route::post('/listData',[TransaksiKomIKSController::class,'listData'])->name('transaksikomiks.listData');
+});
+
