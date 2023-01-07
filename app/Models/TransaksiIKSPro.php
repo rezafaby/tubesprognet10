@@ -22,7 +22,7 @@ class TransaksiIKSPro extends Model
         return $this->belongsTo(IKS::class,'iks_id','id');
     }
 
-    public function Transaksikomiks(){
+    public function TransaksiKomIKS(){
         return $this->hasMany(TransaksiKomIKS::class,'iks_provider_id','id');
     }
 

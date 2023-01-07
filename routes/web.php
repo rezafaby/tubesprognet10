@@ -3,13 +3,12 @@
 use App\Http\Controllers\CrudController;
 use App\Http\Controllers\IksController;
 use App\Http\Controllers\PenjaminController;
+use App\Http\Controllers\TipeIksController;
 use App\Http\Controllers\KomponenGroupsController;
 use App\Http\Controllers\KomponenGroupDetailController;
 use App\Http\Controllers\TransaksiIKSProController;
-use App\Http\Controllers\TipeIksController;
 use App\Http\Controllers\TransaksiKomIKSDetailController;
 use App\Http\Controllers\TransaksiKomIKSController;
-
 use Illuminate\Support\Facades\Route;
 
 /*
