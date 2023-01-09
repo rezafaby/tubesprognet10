@@ -11,7 +11,11 @@
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
-            <a href="{{ route('transaksikomiks.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            @if($id != 0)
+                <a href="{{ route('transaksikomiks.createSpesific', ['id' => $id]) }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            @else
+                <a href="{{ route('transaksikomiks.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            @endif
         </div>
     </div>
 </div>
@@ -51,9 +55,9 @@
                     <table id="{{$table_id}}" class="small-table table " style="width:100%">
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
                             <th width="1%">No.</th>
+                            <th width="10%">Komponen Group</th>
                             <th width="10%">Nama IKS</th>
-                            <th width="10%">Group Komponen ID</th>
-                            <th width="10%">Group</th>
+                            {{-- <th width="10%">Group Komponen ID</th> --}}
                             <th width="10%">Aksi</th>
                         </thead>
                         <tbody></tbody>
@@ -76,7 +80,7 @@ $(document).ready(function() {
         serverSide: true,
         dom: '<"row justify-between g-2 "<"col-7 col-sm-4 text-left"f><"col-5 col-sm-8 text-right"<"datatable-filter"<"d-flex justify-content-end g-2" l>>>><" my-3"t><"row align-items-center"<"col-5 col-sm-12 col-md-6 text-left text-md-left"i><"col-5 col-sm-12 col-md-6 text-md-right"<"d-flex justify-content-end "p>>>',
         ajax: {
-            url: '{{ route("transaksikomiks.listData") }}',
+            url: '{{ route("transaksikomiks.listData", ["id" => $id]) }}',
             type:"POST",
             data: function(params) {
                 params._token = "{{ csrf_token() }}";
@@ -85,26 +89,26 @@ $(document).ready(function() {
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },         
             {
-                data: 'TransaksiIKSPro.nama_iks',
-                name: 'TransaksiIKSPro.nama_iks',
-                orderable: true,
-                searchable: true,
-                class: 'text-left'
-            },
-            {
-                data: 'iks_gkomponen_id',
-                name: 'iks_gkomponen_id',
-                orderable: true,
-                searchable: true,
-                class: 'text-left'
-            },
-            {
                 data: 'group',
                 name: 'group',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
             },
+            {
+                data: 'TransaksiIKSPro.nama_iks',
+                name: 'TransaksiIKSPro.nama_iks',
+                orderable: true,
+                searchable: true,
+                class: 'text-left'
+            },
+            // {
+            //     data: 'iks_gkomponen_id',
+            //     name: 'iks_gkomponen_id',
+            //     orderable: true,
+            //     searchable: true,
+            //     class: 'text-left'
+            // },
             {
                 data: 'aksi',
                 name: 'aksi',

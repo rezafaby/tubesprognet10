@@ -11,7 +11,11 @@
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
-            <a href="{{ route('transaksiikspro.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            @if($id != 0)
+                <a href="{{ route('transaksikomiksdetail.createSpesific', ['id' => $id]) }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            @else
+                <a href="{{ route('transaksikomiks.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            @endif
         </div>
     </div>
 </div>
@@ -42,12 +46,16 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
+                @if(session()->exists('message'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('message') }}
+                  </div>
+                  @endif
                 <div class="table-responsive">
                     <table id="{{$table_id}}" class="small-table table " style="width:100%">
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
                             <th width="1%">No.</th>
-                            <th width="10%">Nama IKS</th>
-                            <th width="10%">Group Komponen ID</th>
+                            <th width="10%">Komponen Group Detail</th>
                             <th width="10%">Group</th>
                             <th width="10%">Aksi</th>
                         </thead>
@@ -71,7 +79,7 @@ $(document).ready(function() {
         serverSide: true,
         dom: '<"row justify-between g-2 "<"col-7 col-sm-4 text-left"f><"col-5 col-sm-8 text-right"<"datatable-filter"<"d-flex justify-content-end g-2" l>>>><" my-3"t><"row align-items-center"<"col-5 col-sm-12 col-md-6 text-left text-md-left"i><"col-5 col-sm-12 col-md-6 text-md-right"<"d-flex justify-content-end "p>>>',
         ajax: {
-            url: '{{ route("transaksiikspro.listData") }}',
+            url: '{{ route("transaksikomiksdetail.listData", ["id" => $id]) }}',
             type:"POST",
             data: function(params) {
                 params._token = "{{ csrf_token() }}";
@@ -80,22 +88,15 @@ $(document).ready(function() {
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },         
             {
-                data: 'IKS.nama',
-                name: 'IKS.nama',
+                data: 'komponen_iks_detail',
+                name: 'komponen_iks_detail',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
             },
             {
-                data: 'nomor_iks',
-                name: 'nomor_iks',
-                orderable: true,
-                searchable: true,
-                class: 'text-left'
-            },
-            {
-                data: 'tanggal_awal',
-                name: 'tanggal_awal',
+                data: 'TransaksiKomIKS.group',
+                name: 'TransaksiKomIKS.group',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
@@ -126,7 +127,7 @@ function deleteData(id,name,elm){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-                url:"{{url('transaksiikspro')}}/"+id,
+                url:"{{url('transaksikomiksdetail')}}/"+id,
                 data:{
                     _method:"DELETE",
                     _token:"{{csrf_token()}}"

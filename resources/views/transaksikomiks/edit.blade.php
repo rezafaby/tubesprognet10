@@ -70,7 +70,7 @@
                     </select>
                 </div> 
   
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="sel1" class="form-label">Group Komponen ID :</label>
                     <select class="form-control" id="iks_gkomponen_id" name="iks_gkomponen_id" required>
                         <option value="0" disabled >Pilih Group Komponen ID</option>
@@ -82,7 +82,7 @@
                         >{{$g->id}}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                   <div class="mb-3">
                     <label for="sel1" class="form-label">Group :</label>
@@ -90,10 +90,10 @@
                         <option value="0" disabled >Pilih Group Kompoben IKS</option>
                         @foreach($group as $g)
                         <option value="{{$g->id}}"
-                            @if($g->id == $data->group)
+                            @if($g->group == $data->group)
                                 SELECTED
                                 @endif
-                        >{{$g->group}}</option>
+                        >{{$g->group}} </option>
                         @endforeach
                         </select>
                 </div>

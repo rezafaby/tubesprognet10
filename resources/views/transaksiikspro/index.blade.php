@@ -42,6 +42,11 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
+                @if(session()->exists('message'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('message') }}
+                  </div>
+                  @endif
                 <div class="table-responsive">
                     <table id="{{$table_id}}" class="small-table table " style="width:100%">
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
@@ -124,7 +129,8 @@ $(document).ready(function() {
                 searchable: false,
                 class: 'text-center',
                 render: function (data, type, full, meta) {
-      return '<img src="img/'+data+'" style="height:100px;"/>';
+    //   return '<img src="img/'+data+'" style="height:100px;"/>'
+      return '<a class="btn btn-sm btn-success" href="img/'+data+'">Download File</a>';
                         }
             },
             {

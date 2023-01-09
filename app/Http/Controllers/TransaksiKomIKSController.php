@@ -15,16 +15,22 @@ class TransaksiKomIKSController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id = 0)
     {
         $icon = 'ni ni-dashlite';
         $subtitle = 'Transaksi Komponen IKS';
         $table_id = 'tbt_komponeniks';
-        return view('transaksikomiks.index',compact('subtitle','table_id','icon',));
+        return view('transaksikomiks.index',compact('subtitle','table_id','icon','id'));
     }
 
-    public function listData(Request $request){
-        $data = TransaksiKomIKS::with('TransaksiIKSPro');
+    public function listData(Request $request, $id){
+        $data = TransaksiKomIKS::with('TransaksiIKSPro')->whereHas('TransaksiIKSPro')->get();
+        if(($id!=0)){
+            $data = TransaksiKomIKS::with('TransaksiIKSPro')->whereHas('TransaksiIKSPro')->where('iks_provider_id',$id)->get();
+        }else{
+            $data = TransaksiKomIKS::with('TransaksiIKSPro');
+        }
+        // $data = TransaksiKomIKS::with('TransaksiIKSPro');
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
@@ -34,6 +40,7 @@ class TransaksiKomIKSController extends Controller
                 ->addColumn('aksi', function($data){
                     $aksi = "";
                     $aksi .= "<a title='Edit Data' href='/transaksikomiks/edit/".$data->id."' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                    $aksi .= "<a title='Transaksi Komponen Detail' href='/transaksikomiksdetail/index/".$data->id."' class='btn btn-md btn-secondary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-eye' ></i></a>";
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",\"{$data->group}\",this)' class='btn btn-md btn-danger' data-id='{$data->group}' data-nama='{$data->group}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
                 })
@@ -62,6 +69,15 @@ class TransaksiKomIKSController extends Controller
         $tikspro = TransaksiIKSPro::all();
         $group = KomponenGroups::all();
         return view('transaksikomiks.create',compact('subtitle','icon','tikspro','group'));
+    }
+    
+    public function createSpesific($id)
+    {
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Tambah Data Mahasiswa';
+        $tikspro = TransaksiIKSPro::where('id', $id)->get();
+        $group = KomponenGroups::all();
+        return view('transaksikomiks.create',compact('subtitle','icon','tikspro','group','id'));
     }
 
     /**
@@ -128,8 +144,10 @@ class TransaksiKomIKSController extends Controller
         $data = TransaksiKomIKS::find($id);
         $group = KomponenGroups::find($request->group);
         $dataRequest = $request->all();
+        $dataRequest['iks_provider_id']  = $request -> nama_iks;
         $dataRequest['group'] = $group->group;
         $data->fill($dataRequest)->save();
+        session()->flash('message',$data['group'].'  Berhasil Diubah');
         return redirect()->route('transaksikomiks.index');
     }
 

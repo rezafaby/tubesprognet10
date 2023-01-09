@@ -17,7 +17,7 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDefault">Modal Default</button> -->
             <!-- <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalDefault"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
             <!-- <a href="javascript:void(0)" class="btn btn-sm btn-success" onclick="filtershow()"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
-            <a href="{{ route('transaksiikspro.index') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="{{ route('transaksikomiksdetail.index') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
 </div>
@@ -55,36 +55,32 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-                <form id="form" action="{{ route('transaksiikspro.update', $data->id)}}" method="POST" enctype="multipart/form-data">
+                <form id="form" action="{{ route('transaksikomiksdetail.update', $data->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                    <label for="sel1" class="form-label">Nama IKS :</label>
-                    <select class="form-control" id="iks" name="iks_id" required>
-                        @foreach($iks as $i)
-                            <option value="{{$i->id}}"
-                                @if($i->id == $data->iks_id)
+                    <label for="sel1" class="form-label">Group Komponen :</label>
+                    <select class="form-control" id="komponen_iks_id" name="komponen_iks_id" required>
+                        @foreach($tkomiks as $tk)
+                            <option value="{{$tk->id}}"
+                                @if($tk->id == $data->komponen_iks_id)
                                     SELECTED
                                     @endif
-                            >{{$i->nama}}</option>
+                            >{{$tk->group}}</option>
                         @endforeach
                     </select>
                 </div> 
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nomor IKS</label>
-                    <input class="form-control" id="nomor_iks" name="nomor_iks"  value="{{ $data->nomor_iks }}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Tanggal Awal</label>
-                    <input type ="date" class="form-control" id="tanggal_awal" name="tanggal_awal"  value="{{ $data->tanggal_awal }}" required>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Tanggal Akhir</label>
-                    <input type ="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir"  value="{{ $data->tanggal_akhir }}" required>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">File IKS</label>
-                    <input  type ="file" class="form-control" id="iks_file" name="iks_file"  value="{{ $data->iks_file }}" required>
+                  <div class="mb-3">
+                    <label for="sel1" class="form-label">Komponen Detail :</label>
+                    <select class="form-control" id="komponen_iks_detail" name="komponen_iks_detail" required>
+                        <option value="0" disabled >Pilih Komponen Detail</option>
+                        @foreach($gdetail as $gd)
+                        <option value="{{$gd->id}}"
+                            @if($gd->gkomponen_detail == $data->komponen_iks_detail)
+                                SELECTED
+                                @endif
+                        >{{$gd->gkomponen_detail}}</option>
+                        @endforeach
+                        </select>
                 </div>
                   <div class="nk-fmg-actions">
                     <div class="btn-group">

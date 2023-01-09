@@ -73,7 +73,10 @@
                     <label for="exampleFormControlInput1" class="form-label">Nomor IKS</label>
                     <input class="form-control" id="nomor_iks" name="nomor_iks"  value="{{ $data->nomor_iks }}" required>
                 </div>
-
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Nama IKS</label>
+                    <input class="form-control" id="nama_iks" name="nama_iks"  value="{{ $data->nama_iks }}" required>
+                </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Tanggal Awal</label>
                     <input type ="date" class="form-control" id="tanggal_awal" name="tanggal_awal"  value="{{ $data->tanggal_awal }}" required>
@@ -84,7 +87,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">File IKS</label><br>
-                    <img src="img/{{ $data->iks_file }}" alt="fileiks" height="400px">
+                    <a class="btn btn-sm" href="img/{{ $data->iks_file }}">Download File</a> <br>
+                    {{-- <img src="img/{{ $data->iks_file }}" alt="fileiks" height="400px"> --}}
                     <input  type ="file" class="form-control" id="iks_file" name="iks_file"  src="img/{{ $data->iks_file }}">
                 </div>
                   <div class="nk-fmg-actions">

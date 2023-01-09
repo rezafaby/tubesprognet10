@@ -34,12 +34,13 @@ class TransaksiIKSProController extends Controller
                 ->addColumn('aksi', function($data){
                     $aksi = "";
                     $aksi .= "<a title='Edit Data' href='/transaksiikspro/edit/".$data->id."' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                    $aksi .= "<a title='Transaksi Komponen' href='/transaksikomiks/index/".$data->id."' class='btn btn-md btn-secondary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-eye' ></i></a>";
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",\"{$data->nama_iks}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' data-nama='{$data->nama_iks}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
                 })
-                ->addColumn('file', function($data){
-                    return '<img src="'.$data->iks_file.'" border="0" width="40" class="img-rounded" align="center" />';
-                })
+                // ->addColumn('file', function($data){
+                //     return '<img src="'.$data->iks_file.'" border="0" width="40" class="img-rounded" align="center" />';
+                // })
                 ->rawColumns(['aksi'])
                 ->make(true);
     }
@@ -82,12 +83,14 @@ class TransaksiIKSProController extends Controller
         $upload = new TransaksiIKSPro;
         $upload->iks_id = $request->iks_id;
         $upload->nomor_iks = $request->nomor_iks;
+        $upload->nama_iks = $request->nama_iks;
         $upload->tanggal_awal = $request->tanggal_awal;
         $upload->tanggal_akhir = $request->tanggal_akhir;
         $upload->iks_file = $namafile;
         
         $file->move(public_path().'/img', $namafile);
         $upload->save();
+        session()->flash('message',$upload['nama_iks'].'  Berhasil Ditambahkan');
         return redirect()->route('transaksiikspro.index');
         
     }
@@ -140,6 +143,7 @@ class TransaksiIKSProController extends Controller
             $dataRequest['iks_file'] = $data['iks_file'];
         }
         $data->fill($dataRequest)->save();
+        session()->flash('message',$data['nama_iks'].'  Berhasil Diubah');
         return redirect()->route('transaksiikspro.index');
     }
 

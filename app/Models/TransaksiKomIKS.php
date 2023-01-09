@@ -19,4 +19,7 @@ class TransaksiKomIKS extends Model
     public function TransaksiIKSPro(){
         return $this->belongsTo(TransaksiIKSPro::class,'iks_provider_id','id');
     }
+    public function TransaksiKomIKSDetail(){
+        return $this->hasMany(TransaksiKomIKSDetail::class,'komponen_iks_id','id');
+    }
 }

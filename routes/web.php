@@ -98,22 +98,28 @@ Route::prefix('/transaksiikspro')->group(function(){
 
 Route::prefix('/transaksikomiks')->group(function(){
     Route::get('/',[TransaksiKomIKSController::class,'index'])->name('transaksikomiks.index');
+    Route::get('index/{id?}',[TransaksiKomIKSController::class,'index'])->name('transaksikomiks.index');
     Route::get('/create',[TransaksiKomIKSController::class,'create'])->name('transaksikomiks.create');
+    Route::get('/create/{id}',[TransaksiKomIKSController::class,'createSpesific'])->name('transaksikomiks.createSpesific');
     Route::post('/store',[TransaksiKomIKSController::class,'store'])->name('transaksikomiks.store');
     Route::get('/edit/{id}',[TransaksiKomIKSController::class,'edit'])->name('transaksikomiks.edit');
     Route::post('/{id}/update',[TransaksiKomIKSController::class,'update'])->name('transaksikomiks.update');
     Route::delete('/{id}',[TransaksiKomIKSController::class,'deleteData'])->name('transaksikomiks.delete');
-    Route::post('/listData',[TransaksiKomIKSController::class,'listData'])->name('transaksikomiks.listData');
+    // Route::post('/listData',[TransaksiKomIKSController::class,'listData'])->name('transaksikomiks.listData');
+    Route::post('/listData/{id?}',[TransaksiKomIKSController::class,'listData'])->name('transaksikomiks.listData');
 });
 
 
 Route::prefix('/transaksikomiksdetail')->group(function(){
     Route::get('/',[TransaksiKomIKSDetailController::class,'index'])->name('transaksikomiksdetail.index');
+    Route::get('index/{id?}',[TransaksiKomIKSDetailController::class,'index'])->name('transaksikomiksdetail.index');
     Route::get('/create',[TransaksiKomIKSDetailController::class,'create'])->name('transaksikomiksdetail.create');
+    Route::get('/create/{id}',[TransaksiKomIKSDetailController::class,'createSpesific'])->name('transaksikomiksdetail.createSpesific');
     Route::post('/store',[TransaksiKomIKSDetailController::class,'store'])->name('transaksikomiksdetail.store');
     Route::get('/edit/{id}',[TransaksiKomIKSDetailController::class,'edit'])->name('transaksikomiksdetail.edit');
     Route::post('/{id}/update',[TransaksiKomIKSDetailController::class,'update'])->name('transaksikomiksdetail.update');
     Route::delete('/{id}',[TransaksiKomIKSDetailController::class,'deleteData'])->name('transaksikomiksdetail.delete');
-    Route::post('/listData',[TransaksiKomIKSDetailController::class,'listData'])->name('transaksikomiksdetail.listData');
+    // Route::post('/listData',[TransaksiKomIKSDetailController::class,'listData'])->name('transaksikomiksdetail.listData');
+    Route::post('/listData/{id?}',[TransaksiKomIKSDetailController::class,'listData'])->name('transaksikomiksdetail.listData');
 });
 

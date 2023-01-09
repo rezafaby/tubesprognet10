@@ -62,11 +62,16 @@
                     <select class="form-control" id="nama_iks" name="nama_iks" required>
                         <option value="0" disabled >Pilih Nama IKS</option>
                             @foreach($tikspro as $tip)
-                                <option value="{{$tip->id}}">{{$tip->nama_iks}}</option>
+                                <option value="{{$tip->id}}"
+                                    @isset($id)
+                                        @if($tip->id==$id) selected @endif
+                                    @endisset >
+                                    {{$tip->nama_iks}}
+                                </option>
                             @endforeach 
                         </select>
-                </div>    
-                <div class="mb-3">
+                </div>  
+                {{-- <div class="mb-3">
                     <label for="sel1" class="form-label">Group Komponen ID :</label>
                     <select class="form-control" id="iks_gkomponen_id" name="iks_gkomponen_id" required>
                         <option value="0" disabled >Pilih Group Komponen ID</option>
@@ -74,7 +79,7 @@
                                 <option value="{{$g->id}}">{{$g->id}}</option>
                             @endforeach 
                         </select>
-                </div>
+                </div> --}}
                   <div class="mb-3">
                     <label for="sel1" class="form-label">Group :</label>
                     <select class="form-control" id="group" name="group" required>

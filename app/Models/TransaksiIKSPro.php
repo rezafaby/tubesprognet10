@@ -13,6 +13,7 @@ class TransaksiIKSPro extends Model
     protected $fillable = [
         'iks_id',
         'nomor_iks',
+        'nama_iks',
         'tanggal_awal',
         'tanggal_akhir',
         'iks_file'
@@ -24,9 +25,5 @@ class TransaksiIKSPro extends Model
 
     public function TransaksiKomIKS(){
         return $this->hasMany(TransaksiKomIKS::class,'iks_provider_id','id');
-    }
-
-    public function Transaksikomiksdetail(){
-        return $this->hasMany(TransaksiKomIKSDetail::class,'komponen_iks_id','id');
     }
 }

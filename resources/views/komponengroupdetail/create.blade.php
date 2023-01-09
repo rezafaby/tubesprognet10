@@ -64,7 +64,7 @@
                   <div class="mb-3">
                     <label for="sel1"class="form-label">Group Komponen :</label>
                     <select class="form-control" id="gkomponen" name="gkomponen_id">
-                        <option value="0" disabled >Pilih Golongan Darah</option>
+                        <option value="0" disabled >Pilih Group Komponen</option>
                         @foreach($gkomponen as $gk)
                             <option value="{{$gk->id}}" 
                                 @isset($id) 

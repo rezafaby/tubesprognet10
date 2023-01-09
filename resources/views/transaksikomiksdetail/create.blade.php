@@ -17,7 +17,7 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDefault">Modal Default</button> -->
             <!-- <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalDefault"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
             <!-- <a href="javascript:void(0)" class="btn btn-sm btn-success" onclick="filtershow()"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
-            <a href="{{ route('transaksikomiks.index') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="{{ route('transaksikomiksdetail.index') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
 </div>
@@ -55,25 +55,31 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-                <form id="form" action="{{ route('transaksikomiks.store')}}" method="POST" enctype="multipart/form-data">
+                <form id="form" action="{{ route('transaksikomiksdetail.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                 <div class="mb-3">
-                    <label for="sel1" class="form-label">Nama IKS :</label>
-                    <select class="form-control" id="nama_iks" name="nama_iks" required>
-                        <option value="0" disabled >Pilih Nama IKS</option>
-                            @foreach($iks as $i)
-                                <option value="{{$i->id}}">{{$i->nama_iks}}</option>
+                    <label for="sel1" class="form-label">Group Komponen :</label>
+                    <select class="form-control" id="komponen_iks_id" name="komponen_iks_id" required>
+                        <option value="0" disabled >Pilih Group Komponen</option>
+                            @foreach($tkomiks as $tk)
+                                <option value="{{$tk->id}}"
+                                    @isset($id)
+                                        @if($tk->id==$id) selected @endif
+                                    @endisset >
+                                    {{$tk->group}}</option>
                             @endforeach 
                         </select>
                 </div>    
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Group Komponen ID</label>
-                    <input class="form-control" id="iks_gkomponen_id" name="iks_gkomponen_id"  placeholder="Masukkan Group Komponen ID" required>
-                  </div>
+                </option>
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Group</label>
-                    <input class="form-control" id="group" name="group"  placeholder="Masukkan Nama IKS" required>
-                  </div>
+                    <label for="sel1" class="form-label">Komponen Detail :</label>
+                    <select class="form-control" id="gkomponen_detail" name="gkomponen_detail" required>
+                        <option value="0" disabled >Pilih Komponen detail</option>
+                            @foreach($gdetail as $gd)
+                                <option value="{{$gd->id}}">{{$gd->gkomponen_detail}}</option>
+                            @endforeach 
+                        </select>
+                </div>
                   <div class="nk-fmg-actions">
                     <div class="btn-group">
                         <button type="submit" class="btn btn-sm btn-primary"><span>Submit</span></button>
