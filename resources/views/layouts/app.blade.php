@@ -94,6 +94,13 @@
         $(elm).addClass('disabled');
         $(elm).html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> <span></span>');
     }
+        @if(Session::has('status'))
+            Swal.fire({
+                icon:  @if(Session::has('icon')){!! '"'.Session::get('icon').'"' !!} @else 'question' @endif,
+                title: @if(Session::has('title')){!! '"'.Session::get('title').'"' !!} @else 'Oppss...'@endif,
+                text: @if(Session::has('message')){!! '"'.Session::get('message').'"' !!} @else 'Oppss...'@endif,
+            });
+        @endif
     </script>
 </body>
 

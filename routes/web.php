@@ -9,6 +9,9 @@ use App\Http\Controllers\KomponenGroupDetailController;
 use App\Http\Controllers\TransaksiIKSProController;
 use App\Http\Controllers\TransaksiKomIKSDetailController;
 use App\Http\Controllers\TransaksiKomIKSController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\auth\AuthController as AuthAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +29,14 @@ Route::get('/',function(){
     return redirect('/iks');
 });
 
+Route::prefix('auth')->group(function () {
+    Route::get('login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('login', [AuthController::class, 'loginPost'])->name('auth.login.post');
+    Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
+});
+
+
+Route::group(['middleware'=>'auth'], function(){
 
 Route::get('/crud',[CrudController::class,'index'])->name('crud.list');
 Route::get('/crud/create',[CrudController::class,'create'])->name('crud.create');
@@ -123,3 +134,19 @@ Route::prefix('/transaksikomiksdetail')->group(function(){
     Route::post('/listData/{id?}',[TransaksiKomIKSDetailController::class,'listData'])->name('transaksikomiksdetail.listData');
 });
 
+Route::prefix('/pegawai')->group(function(){
+    // Route::get('/',[PegawaiController::class,'index'])->name('transaksikomiksdetail.index');
+    // Route::get('index/{id?}',[PegawaiController::class,'index'])->name('transaksikomiksdetail.index');
+    Route::get('show',[PegawaiController::class,'show'])->name('pegawai.show');
+    // Route::get('/show',[PegawaiController::class,'show'])->name('pegawai.show');
+    // Route::get('/create',[PegawaiController::class,'create'])->name('transaksikomiksdetail.create');
+    // Route::get('/create/{id}',[PegawaiController::class,'createSpesific'])->name('transaksikomiksdetail.createSpesific');
+    // Route::post('/store',[PegawaiController::class,'store'])->name('transaksikomiksdetail.store');
+    // Route::get('/edit/{id}',[PegawaiController::class,'edit'])->name('transaksikomiksdetail.edit');
+    // Route::post('/{id}/update',[PegawaiController::class,'update'])->name('transaksikomiksdetail.update');
+    // Route::delete('/{id}',[PegawaiController::class,'deleteData'])->name('transaksikomiksdetail.delete');
+    // // Route::post('/listData',[PegawaiController::class,'listData'])->name('transaksikomiksdetail.listData');
+    // Route::post('/listData/{id?}',[PegawaiController::class,'listData'])->name('pegawai.listData');
+});
+
+});

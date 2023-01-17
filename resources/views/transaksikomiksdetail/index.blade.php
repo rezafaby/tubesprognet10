@@ -10,7 +10,8 @@
         <h4 class="card-title text-primary"><i class='{{$icon}}' data-toggle='tooltip' data-placement='bottom' title='Data {{$subtitle}}'></i>  {{strtoupper("Data ".$subtitle)}}</h4>
     </div>
     <div class="nk-fmg-actions">
-        <div class="btn-group">
+        {{-- <div class="btn-group"><a href="{{ url()->previous() }}" class="btn btn-sm btn-danger" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a> --}}
+            
             @if($id != 0)
                 <a href="{{ route('transaksikomiksdetail.createSpesific', ['id' => $id]) }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
             @else
@@ -51,6 +52,57 @@
                     {{ session('message') }}
                   </div>
                   @endif
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item" aria-current="page">
+                        {{ $dataProvider->nama_iks }}
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page">
+                        {{ $dataProvider->tanggal_awal }}
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page">
+                        {{ $dataProvider->tanggal_akhir }}
+                      </li>
+                    </ol>
+                  </nav>
+                {{-- <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item" aria-current="page">
+                        @foreach($tikspro as $tip)
+                        <p class="fs-1" value="{{$tip->id}}" 
+                            @isset($id)
+                                @if($tip->id==$tkomiksdetail->TransaksiKomIKS->TransaksiIKSPro->id)@endif
+                                @endisset >
+                                {{$tip->nama_iks}}</p>
+                        @endforeach
+                      </li>
+
+                      @foreach($provinces as $index => $province)
+                                    <option value="{{ $province->id }}" @if($province->id == $subdistrict->District->Province->id) selected @endif>{{ $province->province_name }}</option>
+                                @endforeach
+
+                      <li class="breadcrumb-item" aria-current="page">
+                        @foreach($tikspro as $tip)
+                        <p class="fs-1" value="{{$tip->id}}" 
+                            @isset($id)
+                                @if($tip->id==$id)@endif
+                            @endisset >
+                                {{$tip->tanggal_awal}}</p>
+                        @endforeach
+                      </li>
+
+                      <li class="breadcrumb-item" aria-current="page">
+                        @foreach($tikspro as $tip)
+                        <p class="fs-1" value="{{$tip->id}}" 
+                            @isset($id)
+                                @if($tip->id==$id)@endif
+                            @endisset >
+                          {{$tip->tanggal_akhir}}</p>
+                        @endforeach
+                      </li>
+                    </ol>
+                  </nav> --}}
+
                 <div class="table-responsive">
                     <table id="{{$table_id}}" class="small-table table " style="width:100%">
                         <thead style="color:#526484; font-size:11px;" class="thead-light">

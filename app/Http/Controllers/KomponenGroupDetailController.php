@@ -6,6 +6,7 @@ use App\Models\KomponenGroupDetail;
 use App\Models\KomponenGroups;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Session;
 
 class KomponenGroupDetailController extends Controller
 {
@@ -34,6 +35,10 @@ class KomponenGroupDetailController extends Controller
         $table_id = 'tbm_komponengroupdetail';
         // dd($id);
         // $group = KomponenGroups::all();
+
+        Session::put('komiks_url', request()->fullUrl());
+        Session::put('data_url', request()->fullUrl());
+
         return view('komponengroupdetail.index',compact('subtitle','table_id','icon','id'));
 
     }
@@ -82,7 +87,7 @@ class KomponenGroupDetailController extends Controller
     public function create()
     {
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Tambah Data Mahasiswa';
+        $subtitle = 'Tambah Data Komponen Group Detail';
         $gkomponen = KomponenGroups::all();
         return view('komponengroupdetail.create',compact('subtitle','icon','gkomponen'));
     }
@@ -90,7 +95,7 @@ class KomponenGroupDetailController extends Controller
     public function createSpesific($id)
     {
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Tambah Data Mahasiswa';
+        $subtitle = 'Tambah Data Komponen Group Detail';
         $gkomponen = KomponenGroups::where('id', $id)->get();
         return view('komponengroupdetail.create',compact('subtitle','icon','gkomponen','id'));
     }
@@ -114,6 +119,13 @@ class KomponenGroupDetailController extends Controller
         $data = $request->all();
         KomponenGroupDetail::create($data);
         session()->flash('message',$data['gkomponen_detail'].'  Berhasil Ditambahkan');
+        
+
+        if(session(key:'komiks_url')){
+            return redirect(session(key:'komiks_url'));
+        }
+
+
         return redirect()->route('komponengroupdetail.index');
         // return back();
     }
@@ -156,6 +168,9 @@ class KomponenGroupDetailController extends Controller
         $data = KomponenGroupDetail::find($id);
         $data->fill($request->all())->save();
         session()->flash('message',$data['gkomponen_detail'].'  Berhasil Diubah');
+        if(session(key:'data_url')){
+            return redirect(session(key:'data_url'));
+        }
         return redirect()->route('komponengroupdetail.index');
     }
 

@@ -55,7 +55,7 @@
                             <th width="10%">Nomor IKS</th>
                             <th width="10%">Nama IKS</th>
                             <th width="10%">Tanggal Awal</th>
-                            <th width="10%">Tanggal AKhir</th>
+                            <th width="10%">Tanggal Akhir</th>
                             <th width="10%">File IKS</th>
                             <th width="10%">Aksi</th>
                         </thead>
@@ -92,14 +92,16 @@ $(document).ready(function() {
                 name: 'IKS.nama',
                 orderable: true,
                 searchable: true,
-                class: 'text-left'
+                class: 'text-left',
+                width: '13%'
             },
             {
                 data: 'nomor_iks',
                 name: 'nomor_iks',
                 orderable: true,
                 searchable: true,
-                class: 'text-left'
+                class: 'text-left',
+                width: '8%'
             },
             {
                 data: 'nama_iks',
@@ -113,14 +115,16 @@ $(document).ready(function() {
                 name: 'tanggal_awal',
                 orderable: true,
                 searchable: true,
-                class: 'text-left'
+                class: 'text-left',
+                width: '9%'
             },
             {
                 data: 'tanggal_akhir',
                 name: 'tanggal_akhir',
                 orderable: false,
                 searchable: false,
-                class: 'text-center'
+                class: 'text-center',
+                width: '6%'
             },
             {
                 data: 'iks_file',
@@ -138,7 +142,8 @@ $(document).ready(function() {
                 name: 'aksi',
                 orderable: false,
                 searchable: false,
-                class: 'text-center'
+                class: 'text-center',
+                width: '13%'
             },
         ],
     });
@@ -191,5 +196,23 @@ function deleteData(id,name,elm){
     });
 }
 
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        @if(Session::has('login'))
+            Toast.fire({
+                icon:  @if(Session::has('iconLog')){!! '"'.Session::get('iconLog').'"' !!} @else 'question' @endif,
+                text: @if(Session::has('titleLog')){!! '"'.Session::get('titleLog').'"' !!} @else 'Oppss...'@endif,
+            });
+        @endif
 </script>
 @endpush

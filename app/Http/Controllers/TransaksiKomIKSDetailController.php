@@ -8,6 +8,7 @@ use App\Models\TransaksiKomIKS;
 use App\Models\KomponenGroupDetail;
 use App\Models\TransaksiKomIKSDetail;  
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Session;
 
 class TransaksiKomIKSDetailController extends Controller
 {
@@ -21,7 +22,21 @@ class TransaksiKomIKSDetailController extends Controller
         $icon = 'ni ni-dashlite';
         $subtitle = 'Transaksi Komponen IKS Detail';
         $table_id = 'tbt_komiksdetail';
-        return view('transaksikomiksdetail.index',compact('subtitle','table_id','icon','id'));
+        // $tkomiks = TransaksiKomIKS::where('id', $id)->get();
+        // $tkomiksdetail = TransaksiKomIKSDetail::with(['TransaksiKomIKS' => function($query_transaksikomiks){
+        //     $query_transaksikomiks->with('TransaksiIKSPro')->whereHas('TransaksiIKSPro');
+        // }])->whereHas('TransaksiKomIKS')->findOrFail($id);
+        // $tikspro = TransaksiIKSPro::all();
+        // $tkomiks = TransaksiKomIKS::where('iks_provider_id',$tkomiksdetail->TransaksiKomIKS->TransaksiIKSPro->id)->get();
+        
+        Session::put('tkomiksdetail_url', request()->fullUrl());
+        Session::put('data_url', request()->fullUrl());
+
+        $data = TransaksiKomIKS::find($id);
+        $dataProvider = TransaksiIKSPro::find($data->iks_provider_id);
+        // dd($dataProvider);
+
+        return view('transaksikomiksdetail.index',compact('subtitle','table_id','icon','id', 'dataProvider'));
     }
 
     public function listData(Request $request, $id){
@@ -74,7 +89,7 @@ class TransaksiKomIKSDetailController extends Controller
     public function createSpesific($id)
     {
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Tambah Data Mahasiswa';
+        $subtitle = 'Tambah Data Transaksi Komponen IKS Detail';
         $tkomiks = TransaksiKomIKS::where('id', $id)->get();
         $gdetail = KomponenGroupDetail::all();
         return view('transaksikomiksdetail.create',compact('subtitle','icon','tkomiks','gdetail','id'));
@@ -96,6 +111,11 @@ class TransaksiKomIKSDetailController extends Controller
         $tkomiksdetail -> komponen_iks_detail = $gdetail -> gkomponen_detail;
         $tkomiksdetail -> save();
         session()->flash('message',$tkomiksdetail['komponen_iks_detail'].'  Berhasil Ditambahkan');
+
+        if(session(key:'tkomiksdetail_url')){
+            return redirect(session(key:'tkomiksdetail_url'));
+        }
+
         return redirect()->route('transaksikomiksdetail.index');
     }
 
@@ -141,6 +161,10 @@ class TransaksiKomIKSDetailController extends Controller
         $dataRequest['komponen_iks_detail'] = $gdetail->gkomponen_detail;
         $data->fill($dataRequest)->save();
         session()->flash('message',$data['komponen_iks_detail'].'  Berhasil Diubah');
+
+        if(session(key:'data_url')){
+            return redirect(session(key:'data_url'));
+        }
         return redirect()->route('transaksikomiksdetail.index');
     }
 

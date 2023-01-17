@@ -74,11 +74,11 @@
                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                 <div class="user-card">
                                     <div class="user-avatar">
-                                        <span>substr(auth()->user()->name, 0, 1)</span>
+                                        <span>{{ substr(auth()->user()->name, 0, 1) }}</span>
                                     </div>
                                     <div class="user-info">
-                                        <span class="lead-text">auth()->user()->name</span>
-                                        <span class="sub-text">auth()->user()->email</span>
+                                        <span class="lead-text">{{auth()->user()->name}}</span>
+                                        <span class="sub-text">{{auth()->user()->email}}</span>
                                     </div>
                                     <div class="user-action">
                                         <a class="btn btn-icon mr-n2" href="html/user-profile-setting.html"><em class="icon ni ni-setting"></em></a>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <li><a href="#"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
+                                    <li><a href="{{route('pegawai.show') }}"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
                                 </ul>
                             </div>
                             <div class="dropdown-inner">
@@ -108,12 +108,12 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="route('logout')"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <a href="{{route('auth.logout')}}">
                                             <em class="icon ni ni-signout"></em><span>Sign out</span>
                                         </a>
-                                        <form id="logout-form" action="route('logout')" method="POST" class="d-none">
+                                        {{-- <form id="logout-form" action="route('auth.logout')" method="POST" class="d-none">
                                             @csrf
-                                        </form>
+                                        </form> --}}
                                     </li>
                                 </ul>
                             </div>

@@ -106,7 +106,7 @@
                                         <span class="nk-menu-text">Transaksi IKS Provider</span><!-- <span class="nk-menu-badge">HOT</span> -->
                                     </a>
                                 </li><!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
+                                {{-- <li class="nk-menu-item">
                                     <a href="{{URL('/transaksikomiks')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
                                         <span class="nk-menu-text">Transaksi Komponen IKS</span><!-- <span class="nk-menu-badge">HOT</span> -->
@@ -118,7 +118,7 @@
                                         <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
                                         <span class="nk-menu-text">Transaksi Komponen IKS Detail</span><!-- <span class="nk-menu-badge">HOT</span> -->
                                     </a>
-                                </li><!-- .nk-menu-item -->
+                                </li><!-- .nk-menu-item --> --}}
                                 <li class="nk-menu-heading">
                                     <h6 class="overline-title text-primary-alt">Report</h6>
                                 </li><!-- .nk-menu-item -->

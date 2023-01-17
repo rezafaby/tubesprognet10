@@ -56,7 +56,7 @@ class KomponenGroupsController extends Controller
     public function create()
     {
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Tambah Data Mahasiswa';
+        $subtitle = 'Tambah Data Komponen Group';
         return view('komponengroups.create',compact('subtitle','icon'));
     }
 
