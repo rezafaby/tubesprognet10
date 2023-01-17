@@ -181,13 +181,13 @@ class TransaksiKomIKSController extends Controller
         session()->flash('message',$data['group'].'  Berhasil Diubah');
 
 
-        $details = KomponenGroupDetail::where('gkomponen_id', $group_id)->get();
-        foreach($details as $detail){
-            $detailData = new TransaksiKomIKSDetail();
-            $detailData -> komponen_iks_id = $data -> id;
-            $detailData -> komponen_iks_detail = $detail -> gkomponen_detail;
-            $detailData -> save();
-            }
+        // $details = KomponenGroupDetail::where('gkomponen_id', $group_id)->get();
+        // foreach($details as $detail){
+        //     $detailData = new TransaksiKomIKSDetail();
+        //     $detailData -> komponen_iks_id = $data -> id;
+        //     $detailData -> komponen_iks_detail = $detail -> gkomponen_detail;
+        //     $detailData -> save();
+        //     }
 
         if(session(key:'data_url')){
             return redirect(session(key:'data_url'));
