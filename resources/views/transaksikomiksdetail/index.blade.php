@@ -10,7 +10,9 @@
         <h4 class="card-title text-primary"><i class='{{$icon}}' data-toggle='tooltip' data-placement='bottom' title='Data {{$subtitle}}'></i>  {{strtoupper("Data ".$subtitle)}}</h4>
     </div>
     <div class="nk-fmg-actions">
-        {{-- <div class="btn-group"><a href="{{ url()->previous() }}" class="btn btn-sm btn-danger" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a> --}}
+        {{-- {{ url('projects/display/'.$projects->id) }} --}}
+        {{-- href="{{ route('displayProject', ['projects' => $projects->id]) }}" --}}
+        <a href="{{ url('/transaksikomiks/index/'.$dataProvider->id) }}" class="btn btn-sm btn-danger" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
             
             @if($id != 0)
                 <a href="{{ route('transaksikomiksdetail.createSpesific', ['id' => $id]) }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>

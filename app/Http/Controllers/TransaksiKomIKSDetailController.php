@@ -36,7 +36,7 @@ class TransaksiKomIKSDetailController extends Controller
         $dataProvider = TransaksiIKSPro::find($data->iks_provider_id);
         // dd($dataProvider);
 
-        return view('transaksikomiksdetail.index',compact('subtitle','table_id','icon','id', 'dataProvider'));
+        return view('transaksikomiksdetail.index',compact('subtitle','table_id','icon','id', 'dataProvider','data'));
     }
 
     public function listData(Request $request, $id){
