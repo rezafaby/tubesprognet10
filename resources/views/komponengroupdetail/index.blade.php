@@ -125,6 +125,7 @@ function deletePeminjams(index){
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
+            <a href="{{ route('komponengroups.index') }}" class="btn btn-sm btn-danger" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
             @if($id != 0)
                 <a href="{{ route('komponengroupdetail.createSpesific', ['id' => $id]) }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
             @else

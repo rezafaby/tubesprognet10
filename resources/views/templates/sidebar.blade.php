@@ -82,11 +82,11 @@
                                             <span class="nk-menu-text">Data Komponen Group</span>
                                         </a>
                                     </li>
-                                    <li class="nk-menu-item">
+                                    {{-- <li class="nk-menu-item">
                                         <a href="{{URL('/komponengroupdetail')}}" class="nk-menu-link">
                                             <span class="nk-menu-text">Data Komponen Group Detail</span>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </li>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KomponenGroupDetail;
 use App\Models\KomponenGroups;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Session;
@@ -89,7 +90,8 @@ class KomponenGroupDetailController extends Controller
         $icon = 'ni ni-dashlite';
         $subtitle = 'Tambah Data Komponen Group Detail';
         $gkomponen = KomponenGroups::all();
-        return view('komponengroupdetail.create',compact('subtitle','icon','gkomponen'));
+        $pegawai = Pegawai::all();
+        return view('komponengroupdetail.create',compact('subtitle','icon','gkomponen','pegawai'));
     }
 
     public function createSpesific($id)
@@ -97,7 +99,8 @@ class KomponenGroupDetailController extends Controller
         $icon = 'ni ni-dashlite';
         $subtitle = 'Tambah Data Komponen Group Detail';
         $gkomponen = KomponenGroups::where('id', $id)->get();
-        return view('komponengroupdetail.create',compact('subtitle','icon','gkomponen','id'));
+        $pegawai = Pegawai::all();
+        return view('komponengroupdetail.create',compact('subtitle','icon','gkomponen','id','pegawai'));
     }
 
     /**
@@ -108,17 +111,35 @@ class KomponenGroupDetailController extends Controller
      */
     public function store(Request $request)
     {
-        // $pegawai_id = $request -> pegawai_id;
+        $data = $request->all();
+        if ($request->gkomponen_id == 1){
+            $pegawai_id = $request -> gkomponen_detail;
+            $pegawai = Pegawai::find($pegawai_id);
+            $gdetail = new KomponenGroupDetail();
+            $gdetail -> gkomponen_detail = $pegawai -> nama;
+            $gdetail -> gkomponen_id = $request -> gkomponen_id;
+            $data = $gdetail -> save();
+        } else {
+            KomponenGroupDetail::create($data);
+        }
+        // $pegawai_id = $request -> gkomponen_detail;
         // $pegawai = Pegawai::find($pegawai_id);
         // $gdetail = new KomponenGroupDetail();
-        // // $gdetail -> gkomponen_id = $request['gkomponen_id'];
         // $gdetail -> gkomponen_id = $request -> gkomponen_id;
         // $gdetail -> gkomponen_detail = $pegawai -> nama;
-        // $gdetail -> save();
+        // $data = $gdetail -> save();
         
-        $data = $request->all();
-        KomponenGroupDetail::create($data);
-        session()->flash('message',$data['gkomponen_detail'].'  Berhasil Ditambahkan');
+        // $group_id = $request -> group;
+        // $group = KomponenGroups::find($group_id);
+        // $tkomiks = new TransaksiKomIKS();
+        // $tkomiks -> iks_provider_id = $request -> nama_iks;
+        // $tkomiks -> iks_gkomponen_id = $request -> iks_gkomponen_id;
+        // $tkomiks -> group = $group -> group;
+        // $tkomiks -> save();
+        
+        // $data = $request->all();
+        // KomponenGroupDetail::create($data);
+        session()->flash('message','Data Berhasil Ditambahkan');
         
 
         if(session(key:'komiks_url')){

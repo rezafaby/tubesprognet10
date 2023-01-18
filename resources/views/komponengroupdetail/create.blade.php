@@ -57,10 +57,6 @@
             <div class="card-body">
                 <form id="form" action="{{route('komponengroupdetail.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Komponen Detail</label>
-                    <input class="form-control" id="gkomponen_detail" name="gkomponen_detail" placeholder="Masukkan Komponen Detail" required>
-                  </div>
                   <div class="mb-3">
                     <label for="sel1"class="form-label">Group Komponen :</label>
                     <select class="form-control" id="gkomponen" name="gkomponen_id">
@@ -75,6 +71,24 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Komponen Detail</label>
+                    @if($id == 1)
+                    <select class="form-control" id="gkomponen_detail" name="gkomponen_detail">
+                        <option value="0" disabled >Pilih Group Komponen</option>
+                        @foreach($pegawai as $p)
+                            <option value="{{$p->id}}" 
+                                @isset($id) 
+                                    @if($p->id == $id) selected @endif 
+                                @endisset >
+                                {{$p->nama}}
+                            </option>
+                        @endforeach
+                    </select>
+                    @else
+                    <input class="form-control" id="gkomponen_detail" name="gkomponen_detail" placeholder="Masukkan Komponen Detail" required>    
+                    @endif
+                  </div>
                   <div class="nk-fmg-actions">
                     <div class="btn-group">
                         <button type="submit" class="btn btn-sm btn-primary"><span>Submit</span></button>
